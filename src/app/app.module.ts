@@ -12,6 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { AccordionModule } from 'primeng/accordion';
 import { TableModule } from 'primeng/table';
+import { CardModule } from 'primeng/card';
+import { DragDropModule } from 'primeng/dragdrop';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,12 +26,16 @@ import { AppHttpInterceptor } from 'src/service/interceptor.service';
 import { HomeComponent } from './components/home/home.component';
 import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
+import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
+import { TaskCardComponent } from './components/kanban-board/task-card/task-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationLoginComponent,
     HomeComponent,
+    KanbanBoardComponent,
+    TaskCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,9 @@ import ManageUserService from 'src/service/manage.users.service';
     DropdownModule,
     MessagesModule,
     MessageModule,
-    InputTextModule
+    InputTextModule,
+    CardModule,
+    DragDropModule
   ],
   providers: [
     RegistrationService,
