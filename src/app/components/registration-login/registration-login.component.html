@@ -1,42 +1,71 @@
-
-<p-selectButton [options]="stateOptions" [(ngModel)]="userState" optionLabel="label" optionValue="value"></p-selectButton>
+<p-selectButton [options]="stateOptions" [(ngModel)]="userState" optionLabel="label" optionValue="value">
+</p-selectButton>
 
 <div *ngIf="userState=='SIGN_UP'; then thenBlock else elseBlock"></div>
 
 <ng-template #thenBlock>
-    <div class="p-float-label">
-        <input id="email" type="text" pInputText [(ngModel)]="userDetails.emailId"> 
-        <label for="email">Email</label>
+    <div class="center">
+        <div>
+            <div class="field pad">
+                <div class="p-float-label">
+                    <input id="email" type="text" pInputText [(ngModel)]="userDetails.emailId">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="field pad">
+                <div class="p-float-label">
+                    <input id="fname" type="text" pInputText [(ngModel)]="userDetails.firstName">
+                    <label for="fname">Firstname</label>
+                </div>
+            </div>
+            <div class="field pad">
+                <div class="p-float-label">
+                    <input id="lname" type="text" pInputText [(ngModel)]="userDetails.lastName">
+                    <label for="lname">Lastname</label>
+                </div>
+            </div>
+            <div class="field pad">
+                <div class="p-float-label">
+                    <p-password id="password" [(ngModel)]="userDetails.password" [toggleMask]="true"></p-password>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="field pad">
+                <div *ngFor="let userRole of userRoles" class="field-checkbox">
+                    <p-radioButton [inputId]="userRole.key" name="userRole" [value]="userRole.key"
+                        [(ngModel)]="userDetails.userRole">
+                    </p-radioButton>
+                    <label [for]="userRole.key">{{userRole.name}}</label>
+                </div>
+            </div>
+            <div class="field">
+                <button pButton pRipple type="button" icon="pi pi-user-plus" class="p-button-rounded"
+                    styleClass="p-button-lg" (click)="signup()"></button>
+            </div>
+        </div>
     </div>
-    <div class="p-float-label">
-        <input id="fname" type="text" pInputText [(ngModel)]="userDetails.firstName"> 
-        <label for="fname">Firstname</label>
-    </div>
-    <div class="p-float-label">
-        <input id="lname" type="text" pInputText [(ngModel)]="userDetails.lastName"> 
-        <label for="lname">Lastname</label>
-    </div>
-    <div class="p-float-label">
-        <p-password id="password" [(ngModel)]="userDetails.password" [toggleMask]="true"></p-password>
-        <label for="password">Password</label>
-    </div>
-    <div *ngFor="let userRole of userRoles" class="field-checkbox">
-        <p-radioButton [inputId]="userRole.key" name="userRole" [value]="userRole.key" [(ngModel)]="userDetails.userRole"></p-radioButton>
-        <label [for]="userRole.key">{{userRole.name}}</label>
-    </div>
-    <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="signup()"></button>
 </ng-template>
 
 <ng-template #elseBlock>
-    <div *ngIf="userState=='LOGIN'">
-        <div class="p-float-label">
-            <input id="login-email" type="text" pInputText [(ngModel)]="loginUserDetails.emailId"> 
-            <label for="login-email">Email</label>
+    <div class="center">
+
+        <div class="formgroup-inline" *ngIf="userState=='LOGIN'">
+            <div class="field">
+                <div class="p-float-label">
+                    <input id="login-email" type="text" pInputText [(ngModel)]="loginUserDetails.emailId">
+                    <label for="login-email">Email</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="p-float-label">
+                    <p-password id="login-password" [(ngModel)]="loginUserDetails.password" [toggleMask]="true">
+                    </p-password>
+                    <label for="login-password">Password</label>
+                </div>
+            </div>
+            <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded"
+                (click)="login()"></button>
         </div>
-        <div class="p-float-label">
-            <p-password id="login-password" [(ngModel)]="loginUserDetails.password" [toggleMask]="true"></p-password>
-            <label for="login-password">Password</label>
-        </div>
-        <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="login()"></button>
-    </div>    
+
+    </div>
 </ng-template>

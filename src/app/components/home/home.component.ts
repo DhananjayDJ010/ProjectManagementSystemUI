@@ -1,0 +1,111 @@
+import { Component, OnInit } from '@angular/core';
+import HomePageService from 'src/service/homepage.service';
+import ManageUserService from 'src/service/manage.users.service';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  userRole: any;
+  managedProjects: any;
+  involvedProjects: any;
+  showUsersPopupCheck = false;
+  usersList: any = [];
+  allUsers: any = [];
+  processedUser: any;
+  userPresentError = false;
+  selectedRole: any;
+  currentProjectId:any;
+  userCollabRole = ["SCRUM_MASTER", "MEMBER", "EXTERNAL", "NO_ACCESS", "PROJECT_MANAGER"];
+
+  constructor(private home: HomePageService, private manageUsers: ManageUserService) { }
+
+  ngOnInit(): void {
+    let userId: any = localStorage.getItem("loggedInUserId");
+    let emailId: any = localStorage.getItem("loggedInEmailId");
+    let userRole: any = localStorage.getItem("loggedInUserRole");
+    this.home.getInvolvedProjects(emailId).subscribe(response => {
+      console.log("Involved projects call success");
+      console.log(response.body);
+      this.involvedProjects = response.body;
+    });
+    if (userRole === "MANAGER") {
+      this.home.getManagedProjects(userId).subscribe(response => {
+        console.log("Managed projects call success");
+        console.log(response.body);
+        this.managedProjects = response.body;
+      });
+
+      this.userRole = userRole;
+    }
+  }
+
+  manageUsersForProjects() {
+    this.manageUsers.manageUsers({ "projectAccessRequests": this.usersList }, this.currentProjectId).subscribe(response => console.log(response.body))
+  }
+
+  showUsersPopup(projectId: string) {
+    this.currentProjectId = projectId;
+    this.manageUsers.getUsersForProject(projectId).subscribe(response => {
+      this.usersList = response.body
+      this.usersList = this.usersList.map((user: any) => {
+        const mainRole = user.projectRoles.filter((role: any) => role.projectId === projectId);
+        return { ...user, mainRole };
+      });
+      console.log("List for sending request")
+      console.log(this.usersList);
+      this.getAllUsers();
+      this.showUsersPopupCheck = true;
+    });
+  }
+
+  getAllUsers() {
+    this.manageUsers.getAllUsers().subscribe(response => {
+      console.log(response.body);
+      this.allUsers = response.body;
+    })
+  }
+
+  checkUserAlreadyPresent() {
+    const emailList = this.usersList.map((user: any) => user.emailId);
+    this.userPresentError = emailList.includes(this.processedUser.emailId)
+  }
+
+  addUserToList() {
+    const t1 = { collaborationRole:this.selectedRole, projectId:this.currentProjectId
+}
+    this.processedUser.projectRoles.push(t1);
+    const tempUser = {
+      ...this.processedUser,
+      mainRole: [{
+        collaborationRole: this.selectedRole
+      }]
+    }
+    this.usersList.push(tempUser);
+    this.checkUserAlreadyPresent();
+    console.log(this.usersList)
+  }
+
+  modifyUser(){
+    const emailList = this.usersList.map((user: any) => user.emailId);
+    const pos = emailList.indexOf(this.processedUser.emailId);
+    const t1 = {
+      collaborationRole: this.selectedRole, projectId: this.currentProjectId
+    }
+    this.processedUser.projectRoles.push(t1);
+    const tempUser = {
+      ...this.processedUser,
+      mainRole: [{
+        collaborationRole: this.selectedRole
+      }]
+    }
+    this.usersList[pos] = tempUser;
+    this.checkUserAlreadyPresent();
+    console.log(this.usersList)
+  }
+
+}
+
