@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Project } from 'src/model/Project';
 import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
 
@@ -19,7 +20,11 @@ export class HomeComponent implements OnInit {
   userPresentError = false;
   selectedRole: any;
   currentProjectId:any;
+  showCreateProjectPopup = false;
+  managerUserAfterCreateProject = false;
+  newProjectDetails = new Project();
   userCollabRole = ["SCRUM_MASTER", "MEMBER", "EXTERNAL", "NO_ACCESS", "PROJECT_MANAGER"];
+  projectTypes = ["BUSINESS", "SUPPORT"];
 
   constructor(private home: HomePageService, private manageUsers: ManageUserService) { }
 
@@ -49,6 +54,7 @@ export class HomeComponent implements OnInit {
 
   showUsersPopup(projectId: string) {
     this.currentProjectId = projectId;
+    this.showCreateProjectPopup = false;
     this.manageUsers.getUsersForProject(projectId).subscribe(response => {
       this.usersList = response.body
       this.usersList = this.usersList.map((user: any) => {
@@ -105,6 +111,21 @@ export class HomeComponent implements OnInit {
     this.usersList[pos] = tempUser;
     this.checkUserAlreadyPresent();
     console.log(this.usersList)
+  }
+
+  showCreateProjectModal(){
+    this.showCreateProjectPopup = true;
+  }
+
+  createProject(){
+    this.home.createProject(this.newProjectDetails).subscribe(response => {
+      let creationResponse:any = response.body;
+      this.currentProjectId = creationResponse.projectData.projectId
+      this.managerUserAfterCreateProject = true;
+    }, err => {
+      console.log("Error while creating project");
+    })
+
   }
 
 }

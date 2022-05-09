@@ -1,5 +1,5 @@
 <div *ngIf="userRole=='MANAGER'">
-    <button pButton pRipple type="button" label="Create Project"></button>
+    <button pButton pRipple type="button" label="Create Project" (click)="showCreateProjectModal()"></button>
     <div>
         <h5>Managed Projects:</h5>
 
@@ -49,7 +49,7 @@
         </p-table>
         <p-dropdown [options]="allUsers" [(ngModel)]="processedUser" placeholder="Select user" optionLabel="emailId"
             (onChange)="checkUserAlreadyPresent()"></p-dropdown>
-        <p-dropdown *ngIf="userPresentError && processedUser !== undefined" [options]="userCollabRole"
+        <p-dropdown *ngIf="processedUser !== undefined" [options]="userCollabRole"
             [(ngModel)]="selectedRole" (onChange)="checkUserAlreadyPresent()"></p-dropdown>
         <!-- <p-message *ngIf="userPresentError" severity="warn" text="User already present"></p-message> -->
         <button *ngIf="userPresentError && processedUser !== undefined" pButton pRipple type="button"
@@ -60,5 +60,23 @@
             <p-button icon="pi pi-check" (click)="manageUsersForProjects()" label="Ok" styleClass="p-button-text">
             </p-button>
         </ng-template>
+    </p-dialog>
+
+    <p-dialog header="Create Project" [(visible)]="showCreateProjectPopup" [style]="{height: '95vh'}" [modal]="true">
+        <div class="field pad">
+            <input id="pname" type="text" pInputText [(ngModel)]="newProjectDetails.projectName"
+                placeholder="Project Name">
+        </div>
+        <div class="field pad">
+            <p-dropdown id="ptypeSelect" [options]="projectTypes" [(ngModel)]="newProjectDetails.projectType"></p-dropdown>
+        </div>
+        <div class="field pad">
+            <p-button icon="pi pi-plus" (click)="createProject()" label="Create Project" styleClass="p-button-text">
+            </p-button>
+        </div>
+        <div class="field pad" *ngIf="managerUserAfterCreateProject">
+            <p-button icon="pi pi-chevron-circle-right" (click)="showUsersPopup(currentProjectId)" label="Manage Users" styleClass="p-button-text">
+            </p-button>
+        </div>
     </p-dialog>
 </div>
