@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Project } from "src/model/Project";
 
 @Injectable()
 export default class HomePageService{
@@ -22,6 +23,16 @@ export default class HomePageService{
             }
         });
         return involvedProjects;
+    }
+
+    createProject(project: Project) {
+        let createProjectResponse = this.http.post("http://localhost:9000/user-service/api/v1.0/project-tracker/manager/create-project", project, {
+            observe: 'response',
+            headers: {
+                "content-type": "application/json"
+            }
+        });
+        return createProjectResponse;
     }
 
 }
