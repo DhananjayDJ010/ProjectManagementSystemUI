@@ -4,5 +4,5 @@ export class Sprint {
     duration!: string;
     startDate!: Date;
     endDate!: Date;
-    isSprintActive!: boolean;
+    sprintActive!: boolean;
 }
