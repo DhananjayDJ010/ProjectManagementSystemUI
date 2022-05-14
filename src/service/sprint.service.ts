@@ -5,14 +5,14 @@ import { Sprint } from 'src/model/sprint';
 @Injectable()
 export default class SprintService {
   constructor(private http: HttpClient) {}
-  createSprint(newSprint: Sprint, projectId:string) {
+  createSprint(newSprint: Sprint, projectId: string) {
     let newSprintDetails = this.http.post(
       'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint',
       newSprint,
       {
         observe: 'response',
         headers: {
-            'projectIds':projectId,
+          projectIds: projectId,
           'content-type': 'application/json',
         },
       }
@@ -48,17 +48,20 @@ export default class SprintService {
     return userStories;
   }
 
-  updateSprint(sprintId: number, newSprint: Sprint) {
-    let updateSprintRes = this.http.post(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint' +
+  updateSprint(projectId: string, sprintId: number, newSprint: Sprint) {
+    let updateSprintRes = this.http.put(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint/' +
         sprintId,
       newSprint,
       {
+        observe: 'response',
         headers: {
+          projectIds: projectId,
           'content-type': 'application/json',
         },
       }
     );
+    console.log(updateSprintRes);
     return updateSprintRes;
   }
 }
