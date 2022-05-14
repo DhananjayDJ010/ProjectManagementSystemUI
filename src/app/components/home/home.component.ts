@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Project } from 'src/model/Project';
 import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
@@ -23,12 +24,18 @@ export class HomeComponent implements OnInit {
   showCreateProjectPopup = false;
   managerUserAfterCreateProject = false;
   newProjectDetails = new Project();
+  manageUsersPopupTitle ="Manage Users";
   userCollabRole = ["SCRUM_MASTER", "MEMBER", "EXTERNAL", "NO_ACCESS", "PROJECT_MANAGER"];
   projectTypes = ["BUSINESS", "SUPPORT"];
 
-  constructor(private home: HomePageService, private manageUsers: ManageUserService) { }
+  constructor(private home: HomePageService, private manageUsers: ManageUserService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(){
     let userId: any = localStorage.getItem("loggedInUserId");
     let emailId: any = localStorage.getItem("loggedInEmailId");
     let userRole: any = localStorage.getItem("loggedInUserRole");
@@ -47,12 +54,11 @@ export class HomeComponent implements OnInit {
       this.userRole = userRole;
     }
   }
-
   manageUsersForProjects() {
     this.manageUsers.manageUsers({ "projectAccessRequests": this.usersList }, this.currentProjectId).subscribe(response => console.log(response.body))
   }
 
-  showUsersPopup(projectId: string) {
+  showUsersPopup(projectId: string, projectName: string) {
     this.currentProjectId = projectId;
     this.showCreateProjectPopup = false;
     this.manageUsers.getUsersForProject(projectId).subscribe(response => {
@@ -64,6 +70,8 @@ export class HomeComponent implements OnInit {
       console.log("List for sending request")
       console.log(this.usersList);
       this.getAllUsers();
+      this.manageUsersPopupTitle = "Manage Users - ";
+      this.manageUsersPopupTitle += projectName;
       this.showUsersPopupCheck = true;
     });
   }
@@ -122,10 +130,15 @@ export class HomeComponent implements OnInit {
       let creationResponse:any = response.body;
       this.currentProjectId = creationResponse.projectData.projectId
       this.managerUserAfterCreateProject = true;
+      this.loadData();
     }, err => {
       console.log("Error while creating project");
     })
 
+  }
+
+  navigateToProjectView(projectId: string){
+    this.router.navigate(["/projectView",projectId]);
   }
 
 }
