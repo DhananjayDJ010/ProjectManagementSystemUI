@@ -28,6 +28,7 @@ import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { TaskCardComponent } from './components/kanban-board/task-card/task-card.component';
+import { ProjectViewComponent } from './components/project-view/project-view.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TaskCardComponent } from './components/kanban-board/task-card/task-card
     HomeComponent,
     KanbanBoardComponent,
     TaskCardComponent,
+    ProjectViewComponent,
   ],
   imports: [
     BrowserModule,
