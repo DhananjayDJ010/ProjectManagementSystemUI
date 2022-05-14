@@ -26,8 +26,10 @@ import { AppHttpInterceptor } from 'src/service/interceptor.service';
 import { HomeComponent } from './components/home/home.component';
 import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
+import ProjectService from 'src/service/project.service';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { TaskCardComponent } from './components/kanban-board/task-card/task-card.component';
+import { BacklogComponent } from './components/backlog/backlog/backlog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { TaskCardComponent } from './components/kanban-board/task-card/task-card
     HomeComponent,
     KanbanBoardComponent,
     TaskCardComponent,
+    BacklogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { TaskCardComponent } from './components/kanban-board/task-card/task-card
     RegistrationService,
     HomePageService,
     ManageUserService,
+    ProjectService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

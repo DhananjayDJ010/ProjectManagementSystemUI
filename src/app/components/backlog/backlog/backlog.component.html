@@ -1,0 +1,89 @@
+<div *ngIf="userRole=='MANAGER'">
+    <button pButton pRipple type="button" label="Create UserStory" (click)="showCreateUserStoryModal()"></button>
+    <div>
+        <h5>UserStory Backlog</h5>
+
+        <p-table [value]="backlogStories">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>UserStory Id</th>
+                    <th>UserStory Name</th>
+                    <th>Priority/th>
+                    <th>Story Points</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-userstory>
+                <tr>
+                    <td>{{userstory.id}}</td>
+                    <td>{{userstory.name}}</td>
+                    <td>{{userstory.priority}}</td>
+                    <td>{{userstory.storyPoints}}</td>
+                    <!-- <td>
+                        <button pButton pRipple type="button" label="Manage Users"
+                            (click)="showUsersPopup(proj.projectId)"></button>
+                    </td> -->
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+    <!-- <p-dialog header="Manage Users" [(visible)]="showUsersPopupCheck" [style]="{height: '95vh'}" [modal]="true">
+        <p-table [value]="usersList">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Role</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-proj>
+                <tr>
+                    <td>{{proj.emailId}}</td>
+                    <td>{{proj.firstName}}</td>
+                    <td>{{proj.lastName}}</td>
+                    <td>
+                        {{proj.mainRole[0].collaborationRole}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-dropdown [options]="allUsers" [(ngModel)]="processedUser" placeholder="Select user" optionLabel="emailId"
+            (onChange)="checkUserAlreadyPresent()"></p-dropdown>
+        <p-dropdown *ngIf="processedUser !== undefined" [options]="userCollabRole"
+            [(ngModel)]="selectedRole" (onChange)="checkUserAlreadyPresent()"></p-dropdown>
+        <!-- <p-message *ngIf="userPresentError" severity="warn" text="User already present"></p-message> -->
+        <!-- <button *ngIf="userPresentError && processedUser !== undefined" pButton pRipple type="button"
+            icon="pi pi-pencil" (click)="modifyUser()"></button>
+        <button *ngIf="!userPresentError && processedUser !== undefined" pButton pRipple type="button"
+            icon="pi pi-check" (click)="addUserToList()"></button>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="manageUsersForProjects()" label="Ok" styleClass="p-button-text">
+            </p-button>
+        </ng-template>
+    </p-dialog>   -->
+
+    <p-dialog header="Create UserStory" [(visible)]="showCreateUserStoryModal" [style]="{height: '95vh'}" [modal]="true">
+        <div class="field pad">
+            <input id="uname" type="text" pInputText [(ngModel)]="newUserStory.name"
+                placeholder="UserStory Name">
+        </div>
+        <div class="field pad">
+            <input id="upriority" type="text" pInputText [(ngModel)]="newUserStory.priority"
+                placeholder="Priority">
+        </div>
+        <div class="field pad">
+            <input id="ustorypoint" type="text" pInputText [(ngModel)]="newUserStory.storyPoints"
+                placeholder="Story Points">
+        </div>
+     
+        <div class="field pad">
+            <p-button icon="pi pi-plus" (click)="createUserStory()" label="Create UserStory" styleClass="p-button-text">
+            </p-button>
+        </div>
+        <!-- <div class="field pad" *ngIf="managerUserAfterCreateProject">
+            <p-button icon="pi pi-chevron-circle-right" (click)="showUsersPopup(currentProjectId)" label="Manage Users" styleClass="p-button-text">
+            </p-button>
+        </div> -->
+    </p-dialog>
+</div>
