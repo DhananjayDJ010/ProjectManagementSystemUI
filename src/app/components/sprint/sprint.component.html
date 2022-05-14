@@ -1,0 +1,65 @@
+<div
+  class="grid"
+  *ngIf="userRole === 'PROJECT_MANAGER' || userRole === 'SCRUM_MASTER'"
+>
+  <div class="col">
+    <input
+      type="text"
+      pInputText
+      placeholder="Name"
+      [(ngModel)]="newSprint.name"
+    />
+  </div>
+  <div class="col">
+    <p-calendar
+      [(ngModel)]="newSprint.startDate"
+      placeholder="Start Date"
+    ></p-calendar>
+  </div>
+  <div class="col">
+    <p-calendar
+      [(ngModel)]="newSprint.endDate"
+      placeholder="End Date"
+    ></p-calendar>
+  </div>
+  <div class="col">
+    <p-dropdown
+      [options]="sprintStatus"
+      [(ngModel)]="selectedStatusObj"
+      placeholder="Select status"
+      optionLabel="label"
+      (onChange)="getSprintStatus()"
+    ></p-dropdown>
+  </div>
+  <div class="col">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Add Sprint"
+      (click)="createNewSprint()"
+    ></button>
+  </div>
+</div>
+<h1 *ngIf="sprintDetails.length === 0">No sprints currently added</h1>
+<p-table *ngIf="sprintDetails.length > 0" [value]="sprintDetails">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Status</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-sprint>
+    <tr>
+      <td>{{ sprint.id }}</td>
+      <td>{{ sprint.name }}</td>
+      <td>{{ sprint.startDate | date }}</td>
+      <td>{{ sprint.endDate | date }}</td>
+      <td *ngIf="sprint.sprintActive">ACTIVE</td>
+      <td *ngIf="!sprint.sprintActive">INACTIVE</td>
+    </tr>
+  </ng-template>
+</p-table>
