@@ -139,6 +139,18 @@
             tooltipPosition="right"
             (click)="getBacklog()"
           ></button>
+          <span style="margin-left: 3px; margin-right: 3px"></span>
+          <button
+            *ngIf="checkActiveStatus(sprint) === 0"
+            pButton
+            pRipple
+            type="button"
+            class="p-button-outlined"
+            icon="pi pi-arrow-circle-right"
+            pTooltip="Kanban board"
+            tooltipPosition="right"
+            (click)="goToKanbanBoard(sprint.id)"
+          ></button>
         </td>
       </tr>
     </ng-template>

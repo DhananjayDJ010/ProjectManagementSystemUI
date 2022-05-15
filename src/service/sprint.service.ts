@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Sprint } from 'src/model/sprint';
+import { SprintUserStory } from 'src/model/sprintUserstory';
 
 @Injectable()
 export default class SprintService {
@@ -93,6 +94,23 @@ export default class SprintService {
       }
     );
     return userStories;
+  }
+
+  updateSprintUserStory(projectId:string,sprintId: number, newSprint: SprintUserStory) {
+    let updateSprintRes = this.http.put(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/update/user-story/' +
+        sprintId,
+      newSprint,
+      {
+        observe: 'response',
+        headers: {
+          projectIds: projectId,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    console.log(updateSprintRes);
+    return updateSprintRes;
   }
 }
 
