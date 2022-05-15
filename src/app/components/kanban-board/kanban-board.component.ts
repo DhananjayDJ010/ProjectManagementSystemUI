@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
+import { SprintUserStory } from 'src/model/sprintUserstory';
+import { SprintUserStoryChild } from 'src/model/SprintUserStoryChild';
+import SprintService from 'src/service/sprint.service';
 
 interface status {
   name: string;
@@ -24,30 +28,60 @@ export class KanbanBoardComponent implements OnInit {
   public title: string = '';
   public description: string = '';
   public selectedStatus: status = { name: '', code: '' };
-  todo: Task[] = [];
+  projectId!: string;
+  sprintId!: string;
+  sprintUserStories: SprintUserStory[] = [];
+
+  todo: SprintUserStory[] = [];
   constructor(
-  ) {
-  }
-  started: Task[] = [];
-  inprogress: Task[] = [];
-  completed: Task[] = [];
-  accepted: Task[] = [];
-  movingTask: any = {
-    id: '',
-    title: '',
-    description: '',
-    status: '',
-  };
+    private route: ActivatedRoute,
+    private sprintService: SprintService
+  ) {}
+  DEFINED: SprintUserStory[] = [];
+  IN_PROGRESS: SprintUserStory[] = [];
+  DONE: SprintUserStory[] = [];
+  ACCEPTED: SprintUserStory[] = [];
+  movingTask: SprintUserStory = new SprintUserStory();
+  // movingTask: any = {
+  //   id: '',
+  //   title: '',
+  //   description: '',
+  //   status: '',
+  // };
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.projectId = params['projectId'];
+      this.sprintId = params['sprintId'];
+      console.log(this.projectId, this.sprintId);
+      this.getUserStoriesForSprint(this.sprintId);
+    });
     this.filterSets();
     this.statuses = [
-      { name: 'Started', code: 'started' },
-      { name: 'In Progress', code: 'inprogress' },
-      { name: 'Completed', code: 'completed' },
-      { name: 'Accepted', code: 'accepted' },
+      { name: 'Defined', code: 'DEFINED' },
+      { name: 'In Progress', code: 'IN_PROGRESS' },
+      { name: 'Done', code: 'DONE' },
+      { name: 'ACCEPTED', code: 'ACCEPTED' },
     ];
   }
 
+  getUserStoriesForSprint(sprintId: string) {
+    this.sprintService
+      .getUserStoriesForSprint(parseInt(sprintId, 10))
+      .subscribe((response) => {
+        console.log(response.body);
+        this.sprintUserStories = <SprintUserStory[]>response.body;
+        this.todo = this.sprintUserStories;
+        this.filterSets();
+        console.log(this.sprintUserStories);
+        // this.sprintUserStories = sprintUserStories.map((story) => {
+        //   let child = new SprintUserStoryChild(story);
+        //   return {
+        //     ...story,
+        //     data: [child],
+        //   };
+        // });
+      });
+  }
   public generateId() {
     return 'id' + Math.random().toString(16).slice(2);
   }
@@ -56,25 +90,25 @@ export class KanbanBoardComponent implements OnInit {
     //no need to add to corresponding listsince subscription is working
     //this.addToSpecificGroup(task);
   }
-  private addToSpecificGroup(task: Task) {
-    if (task.status === 'started') {
-      this.started.push(task);
+  private addToSpecificGroup(task: SprintUserStory) {
+    if (task.status === 'DEFINED') {
+      this.DEFINED.push(task);
     }
-    if (task.status === 'inprogress') {
-      this.inprogress.push(task);
+    if (task.status === 'IN_PROGRESS') {
+      this.IN_PROGRESS.push(task);
     }
-    if (task.status === 'completed') {
-      this.completed.push(task);
+    if (task.status === 'DONE') {
+      this.DONE.push(task);
     }
-    if (task.status === 'accepted') {
-      this.accepted.push(task);
+    if (task.status === 'ACCEPTED') {
+      this.ACCEPTED.push(task);
     }
   }
   private resetGroups() {
-    this.started = [];
-    this.inprogress = [];
-    this.completed = [];
-    this.accepted = [];
+    this.DEFINED = [];
+    this.IN_PROGRESS = [];
+    this.DONE = [];
+    this.ACCEPTED = [];
   }
   private filterSets() {
     this.resetGroups();
@@ -95,22 +129,22 @@ export class KanbanBoardComponent implements OnInit {
   }
   private startMoving(startStatus: string) {
     let pos = -1;
-    if (startStatus === 'started') {
+    if (startStatus === 'DEFINED') {
       pos = this[startStatus].findIndex((x) => this.movingTask.id === x.id);
       this[startStatus].splice(pos, 1);
     }
-    if (startStatus === 'inprogress') {
-      console.log(this.inprogress);
+    if (startStatus === 'IN_PROGRESS') {
+      console.log(this.IN_PROGRESS);
       pos = this[startStatus].findIndex((x) => this.movingTask.id === x.id);
       this[startStatus].splice(pos, 1);
     }
-    if (startStatus === 'completed') {
-      console.log(this.completed);
+    if (startStatus === 'DONE') {
+      console.log(this.DONE);
       pos = this[startStatus].findIndex((x) => this.movingTask.id === x.id);
       this[startStatus].splice(pos, 1);
     }
-    if (startStatus === 'accepted') {
-      console.log(this.accepted);
+    if (startStatus === 'ACCEPTED') {
+      console.log(this.ACCEPTED);
       pos = 0;
       this[startStatus].splice(pos, 1);
     }
@@ -118,23 +152,33 @@ export class KanbanBoardComponent implements OnInit {
   private endMoving(endStatus: string) {
     this.movingTask.status = endStatus;
     console.log(this.movingTask);
-    if (endStatus === 'started') {
-      this.started.push(this.movingTask);
+    if (endStatus === 'DEFINED') {
+      this.DEFINED.push(this.movingTask);
     }
-    if (endStatus === 'inprogress') {
-      this.inprogress.push(this.movingTask);
+    if (endStatus === 'IN_PROGRESS') {
+      this.IN_PROGRESS.push(this.movingTask);
     }
-    if (endStatus === 'completed') {
-      this.completed.push(this.movingTask);
+    if (endStatus === 'DONE') {
+      this.DONE.push(this.movingTask);
     }
-    if (endStatus === 'accepted') {
-      this.accepted.push(this.movingTask);
+    if (endStatus === 'ACCEPTED') {
+      this.ACCEPTED.push(this.movingTask);
     }
+    this.updateCardStatus();
     // this.itemDoc = this.afs.doc<Task>(
     //   'task-list/' + this.movingTask.trackingId
     // );
     // this.itemDoc.update(this.movingTask);
   }
+
+  updateCardStatus() {
+    this.sprintService
+      .updateSprintUserStory(this.projectId,this.movingTask.id, this.movingTask)
+      .subscribe((response) => {
+        console.log(response.body);
+      });
+  }
+
   cardDetailsToRemove(event: any) {
     console.log(event);
     // this.itemDoc = this.afs.doc<Task>('task-list/' + event.trackingId);
@@ -142,13 +186,13 @@ export class KanbanBoardComponent implements OnInit {
   }
 
   createCard() {
-    const temptask = {
-      title: this.title,
-      description: this.description,
-      status: this.selectedStatus.code,
-      id: this.generateId()
-    };
-    this.todo.push(temptask);
-    this.filterSets()
+    // const temptask = {
+    //   title: this.title,
+    //   description: this.description,
+    //   status: this.selectedStatus.code,
+    //   id: this.generateId(),
+    // };
+    // this.todo.push(temptask);
+    // this.filterSets();
   }
 }

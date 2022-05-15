@@ -1,5 +1,5 @@
 <div class="grid">
-    <div class="col-12">
+  <!-- <div class="col-12">
         <div class="col">
             <input type="text" pInputText placeholder="Title" [(ngModel)]="title" />
         </div>
@@ -13,43 +13,63 @@
             <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-secondary" pTooltip="Add New Task"
                 tooltipPosition="top" (click)="createCard()"></button>
         </div>
-    </div>
-    <div class="col-3">
-        <p-card> Started </p-card>
-    </div>
-    <div class="col-3">
-        <p-card> In Progress </p-card>
-    </div>
-    <div class="col-3">
-        <p-card> Completed </p-card>
-    </div>
-    <div class="col-3">
-        <p-card> Accepted </p-card>
-    </div>
+    </div> -->
+  <div class="col-3">
+    <p-card> Defined </p-card>
+  </div>
+  <div class="col-3">
+    <p-card> In Progress </p-card>
+  </div>
+  <div class="col-3">
+    <p-card> Done </p-card>
+  </div>
+  <div class="col-3">
+    <p-card> Accepted </p-card>
+  </div>
 </div>
 <div class="grid">
-    <div class="col-3" id="started" pDroppable="task" (onDrop)="drop($event)">
-        <div class="flex flex-column" *ngFor="let task of started">
-            <app-task-card style="margin: 10px" [cardDetails]="task" pDraggable="task" (onDragStart)="dragStart(task)"
-                (emittedCardDetails)="cardDetailsToRemove($event)"></app-task-card>
-        </div>
+  <div class="col-3" id="DEFINED" pDroppable="task" (onDrop)="drop($event)">
+    <div class="flex flex-column" *ngFor="let task of DEFINED">
+      <app-task-card
+        style="margin: 10px"
+        [cardDetails]="task"
+        pDraggable="task"
+        (onDragStart)="dragStart(task)"
+        (emittedCardDetails)="cardDetailsToRemove($event)"
+      ></app-task-card>
     </div>
-    <div class="col-3" id="inprogress" pDroppable="task" (onDrop)="drop($event)">
-        <div class="flex flex-column" *ngFor="let task of inprogress">
-            <app-task-card style="margin: 10px" [cardDetails]="task" pDraggable="task" (onDragStart)="dragStart(task)"
-                (emittedCardDetails)="cardDetailsToRemove($event)"></app-task-card>
-        </div>
+  </div>
+  <div class="col-3" id="IN_PROGRESS" pDroppable="task" (onDrop)="drop($event)">
+    <div class="flex flex-column" *ngFor="let task of IN_PROGRESS">
+      <app-task-card
+        style="margin: 10px"
+        [cardDetails]="task"
+        pDraggable="task"
+        (onDragStart)="dragStart(task)"
+        (emittedCardDetails)="cardDetailsToRemove($event)"
+      ></app-task-card>
     </div>
-    <div class="col-3" id="completed" pDroppable="task" (onDrop)="drop($event)">
-        <div class="flex flex-column" *ngFor="let task of completed">
-            <app-task-card style="margin: 10px" [cardDetails]="task" pDraggable="task" (onDragStart)="dragStart(task)"
-                (emittedCardDetails)="cardDetailsToRemove($event)"></app-task-card>
-        </div>
+  </div>
+  <div class="col-3" id="DONE" pDroppable="task" (onDrop)="drop($event)">
+    <div class="flex flex-column" *ngFor="let task of DONE">
+      <app-task-card
+        style="margin: 10px"
+        [cardDetails]="task"
+        pDraggable="task"
+        (onDragStart)="dragStart(task)"
+        (emittedCardDetails)="cardDetailsToRemove($event)"
+      ></app-task-card>
     </div>
-    <div class="col-3" id="accepted" pDroppable="task" (onDrop)="drop($event)">
-        <div class="flex flex-column" *ngFor="let task of accepted">
-            <app-task-card style="margin: 10px" [cardDetails]="task" pDraggable="task" (onDragStart)="dragStart(task)"
-                (emittedCardDetails)="cardDetailsToRemove($event)"></app-task-card>
-        </div>
+  </div>
+  <div class="col-3" id="ACCEPTED" pDroppable="task" (onDrop)="drop($event)">
+    <div class="flex flex-column" *ngFor="let task of ACCEPTED">
+      <app-task-card
+        style="margin: 10px"
+        [cardDetails]="task"
+        pDraggable="task"
+        (onDragStart)="dragStart(task)"
+        (emittedCardDetails)="cardDetailsToRemove($event)"
+      ></app-task-card>
     </div>
+  </div>
 </div>

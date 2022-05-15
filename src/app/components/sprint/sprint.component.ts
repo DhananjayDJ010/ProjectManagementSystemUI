@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Sprint } from 'src/model/sprint';
 import CollabRoleService from 'src/service/collabrole.service';
 import SprintService from 'src/service/sprint.service';
@@ -11,7 +12,8 @@ import SprintService from 'src/service/sprint.service';
 export class SprintComponent implements OnInit {
   constructor(
     private sprintService: SprintService,
-    private collabRoleService: CollabRoleService
+    private collabRoleService: CollabRoleService,
+    private router:Router
   ) {}
   @Input() projectId!: string;
   sprintDetails: Sprint[] = [];
@@ -124,5 +126,9 @@ export class SprintComponent implements OnInit {
 
   addUserstories(){
     console.log(this.selectedBacklog);
+  }
+
+  goToKanbanBoard(sprintId:string){
+    this.router.navigate(['sprintboard',this.projectId,sprintId])
   }
 }

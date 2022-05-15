@@ -33,16 +33,7 @@ export class ProjectViewComponent implements OnInit {
           console.log(event.item);
           this.selectedItem = event.item.label;
         }
-      },
-      {
-        label: 'Kanban board', icon: 'pi pi-list', command: (event) => {
-          //event.originalEvent: Browser event
-          console.log(event.item);
-          this.selectedItem = event.item.label;
-        }
       }
-
-
     ]
   }
 
