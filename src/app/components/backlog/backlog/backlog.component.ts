@@ -13,6 +13,7 @@ export class BacklogComponent implements OnInit {
   projectId : any;
   currentUserstoryId : any;
   showCreateUserStoryPopup = false;
+  showManageUserStoryPopup = false;
   userRole: any;
  
 
@@ -43,6 +44,10 @@ export class BacklogComponent implements OnInit {
 
   showCreateUserStoryModal(){
     this.showCreateUserStoryPopup=true;
+
+  }
+  showManageUserStoryPopUp(userstory:UserStory){
+    this.showManageUserStoryPopup =true;
 
   }
 

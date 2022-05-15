@@ -30,6 +30,7 @@ import ProjectService from 'src/service/project.service';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { TaskCardComponent } from './components/kanban-board/task-card/task-card.component';
 import { BacklogComponent } from './components/backlog/backlog/backlog.component';
+import { ProjectViewComponent } from './components/project-view/project-view.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { BacklogComponent } from './components/backlog/backlog/backlog.component
     KanbanBoardComponent,
     TaskCardComponent,
     BacklogComponent,
+    ProjectViewComponent,
   ],
   imports: [
     BrowserModule,
