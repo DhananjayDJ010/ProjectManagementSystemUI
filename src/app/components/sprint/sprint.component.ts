@@ -18,6 +18,9 @@ export class SprintComponent implements OnInit {
   userRole!: string;
   newSprint: Sprint = new Sprint();
   selectedSprint = -1;
+  backlogStories: any = [];
+  showBacklogpopup = false;
+  selectedBacklog: any;
   sprintStatus: any = [
     { label: 'ACTIVE', value: true },
     { label: 'INACTIVE', value: false },
@@ -34,7 +37,15 @@ export class SprintComponent implements OnInit {
       .getAllSprintDetails(this.projectId)
       .subscribe((response) => {
         console.log(response.body);
+        // new Date(new Date().toDateString());
         this.sprintDetails = <Sprint[]>response.body;
+        this.sprintDetails = this.sprintDetails.map((detail) => {
+          let sd: Date = new Date(detail.startDate.toString().split('T')[0]);
+          let ed: Date = new Date(detail.endDate.toString().split('T')[0]);
+          detail.startDate = sd;
+          detail.endDate = ed;
+          return detail;
+        });
       });
   }
 
@@ -83,17 +94,35 @@ export class SprintComponent implements OnInit {
     return -1;
   }
 
-  toggleSprintStatus(sprintId:number, sprintData:Sprint){
-    let newSprintData = {...sprintData}
+  toggleSprintStatus(sprintId: number, sprintData: Sprint) {
+    let newSprintData = { ...sprintData };
     newSprintData.sprintActive = !newSprintData.sprintActive;
     this.sprintService
       .updateSprint(this.projectId, sprintId, newSprintData)
       .subscribe((response) => {
         console.log(response.body);
+        this.getAllSprintDetails();
       });
   }
 
-  updateSprintDetails(sprintData:Sprint){
+  updateSprintDetails(sprintData: Sprint) {
     console.log(sprintData);
+  }
+
+  showSprintPage(event: any) {
+    this.selectedSprint = -1;
+  }
+
+  getBacklog() {
+    this.sprintService
+      .getUserStoriesInBacklog(this.projectId)
+      .subscribe((response) => {
+        this.backlogStories = response.body;
+        this.showBacklogpopup = true;
+      });
+  }
+
+  addUserstories(){
+    console.log(this.selectedBacklog);
   }
 }
