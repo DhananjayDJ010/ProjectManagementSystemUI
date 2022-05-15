@@ -14,7 +14,7 @@ export class ProjectViewComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
   }
   projectId!: string
-  selectedItem!:string
+  selectedItem="Sprint"
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.projectId = params['id'];

@@ -64,4 +64,35 @@ export default class SprintService {
     console.log(updateSprintRes);
     return updateSprintRes;
   }
+
+  getUserStoriesInBacklog(projectId: string) {
+    let userStories = this.http.get(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/backlog/user-story/' +
+        projectId,
+      {
+        observe: 'response',
+        headers: {
+          'content-type': 'application/json',
+          projectIds: projectId,
+        },
+      }
+    );
+    return userStories;
+  }
+
+  addFromBacklog(projectId: string) {
+    let userStories = this.http.get(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/backlog/user-story/' +
+        projectId,
+      {
+        observe: 'response',
+        headers: {
+          'content-type': 'application/json',
+          projectIds: projectId,
+        },
+      }
+    );
+    return userStories;
+  }
 }
+

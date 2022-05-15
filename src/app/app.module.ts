@@ -21,7 +21,10 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { TooltipModule } from 'primeng/tooltip';
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
 import { FormsModule } from '@angular/forms';
 import RegistrationService from 'src/service/registration.service';
@@ -69,7 +72,10 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
     DragDropModule,
     MenuModule,
     MenubarModule,
-    CalendarModule
+    CalendarModule,
+    SplitButtonModule,
+    TooltipModule,
+    MultiSelectModule
   ],
   providers: [
     RegistrationService,
@@ -77,8 +83,8 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
     ManageUserService,
     SprintService,
     CollabRoleService,
-    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
