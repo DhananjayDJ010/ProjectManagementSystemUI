@@ -32,8 +32,10 @@ import { AppHttpInterceptor } from 'src/service/interceptor.service';
 import { HomeComponent } from './components/home/home.component';
 import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
+import ProjectService from 'src/service/project.service';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { TaskCardComponent } from './components/kanban-board/task-card/task-card.component';
+import { BacklogComponent } from './components/backlog/backlog/backlog.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
 import { SprintComponent } from './components/sprint/sprint.component';
 import SprintService from 'src/service/sprint.service';
@@ -47,6 +49,7 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
     HomeComponent,
     KanbanBoardComponent,
     TaskCardComponent,
+    BacklogComponent,
     ProjectViewComponent,
     SprintComponent,
     SprintUserstoryComponent,
@@ -81,6 +84,7 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
     RegistrationService,
     HomePageService,
     ManageUserService,
+    ProjectService,
     SprintService,
     CollabRoleService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },

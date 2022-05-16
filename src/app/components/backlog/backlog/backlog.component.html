@@ -1,0 +1,138 @@
+<div *ngIf="userRole=='MANAGER'">
+    <button pButton pRipple type="button" label="Create UserStory" (click)="showCreateUserStoryModal()"></button>
+    <!-- <div>
+        <h5>UserStory Backlog</h5>
+
+        <p-table [value]="backlogStories">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>UserStory Id</th>
+                    <th>UserStory Name</th>
+                    <th>Priority/th>
+                    <th>Story Points</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-userstory>
+                <tr>
+                    <td>{{userstory.id}}</td>
+                    <td>{{userstory.name}}</td>
+                    <td>{{userstory.priority}}</td>
+                    <td>{{userstory.storyPoints}}</td>
+                    <td>
+                        <button pButton pRipple type="button" label="Manage UserStory"
+                            (click)="showManageUserStoryPopUp(userstory)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div> -->
+    <p-table
+  [value]="backlogStories"
+  dataKey="Name"
+  rowExpandMode="single"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem"></th>
+      <th>UserStory Id</th>
+      <th>UserStory Name</th>
+      <th>Story Points</th>
+      <th>Priority</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-userStory let-rowIndex="rowIndex">
+    <tr>
+      <td>
+        <button
+          type="button"
+          pButton
+          pRipple
+          class="p-button-text p-button-rounded p-button-plain"
+          icon="pi pi-chevron-down"
+          (click)="rowSelected(rowIndex, userStory)"
+        ></button>
+      </td>
+      <td>{{ userStory.name }}</td>
+      <td>{{ userStory.assignedUser }}</td>
+      <td>{{ userStory.storyPoints }}</td>
+      <td>
+        {{ userStory.priority }}
+      </td>
+      <td>{{ userStory.status }}</td>
+    </tr>
+    <tr *ngIf="selectedRowNumber === rowIndex">
+      <td colspan="5">
+        <div class="grid">
+          <div class="col-10">
+            <strong>Acceptance Criteria : </strong
+            >{{ selectedUserStory.acceptanceCriteria }}
+          </div>
+          <div class="col-2">
+            <div class="grid">
+              <div class="col-12">
+                <strong>Consumed Effort : </strong
+                >{{ selectedUserStory.consumedEfforts }}
+              </div>
+              <div class="col-12">
+                <strong>Estimated Effort : </strong
+                >{{ selectedUserStory.estimatedEfforts }}
+              </div>
+              <div class="col-12">
+                <strong>Remaining Effort : </strong
+                >{{ selectedUserStory.remainingEfforts }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+    
+    <p-dialog header="Create UserStory" [(visible)]="showCreateUserStoryPopup" [style]="{height: '95vh'}" [modal]="true">
+        <div class="field pad">
+            <input id="uname" type="text" pInputText [(ngModel)]="newUserStory.name"
+                placeholder="UserStory Name">
+        </div>
+        <div class="field pad">
+            <input id="upriority" type="text" pInputText [(ngModel)]="newUserStory.priority"
+                placeholder="Priority">
+        </div>
+        <div class="field pad">
+            <input id="ustorypoint" type="text" pInputText [(ngModel)]="newUserStory.storyPoints"
+                placeholder="Story Points">
+        </div>
+     
+        <div class="field pad">
+            <p-button icon="pi pi-plus" (click)="createUserStory()" label="Create UserStory" styleClass="p-button-text">
+            </p-button>
+        </div>
+        <!-- <div class="field pad" *ngIf="managerUserAfterCreateProject">
+            <p-button icon="pi pi-chevron-circle-right" (click)="showUsersPopup(currentProjectId)" label="Manage Users" styleClass="p-button-text">
+            </p-button>
+        </div> -->
+    </p-dialog>
+
+    <!-- <p-dialog header="Manage UserStory" [(visible)]="showManageUserStoryPopup" [style]="{height: '95vh'}" [modal]="true">
+        <div class="field pad">
+            <input id="uname" type="text" pInputText [(ngModel)]="newUserStory.name"
+                placeholder="UserStory Name">
+        </div>
+        <div class="field pad">
+            <input id="upriority" type="text" pInputText [(ngModel)]="newUserStory.priority"
+                placeholder="Priority">
+        </div>
+        <div class="field pad">
+            <input id="ustorypoint" type="text" pInputText [(ngModel)]="newUserStory.storyPoints"
+                placeholder="Story Points">
+        </div>
+     
+        <div class="field pad">
+            <p-button icon="pi pi-plus" (click)="createUserStory()" label="Create UserStory" styleClass="p-button-text">
+            </p-button>
+        </div>
+        
+    </p-dialog> -->
+</div>
