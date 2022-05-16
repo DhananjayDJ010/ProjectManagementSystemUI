@@ -10,7 +10,7 @@ import { SprintComponent } from './components/sprint/sprint.component';
 const routes: Routes = [
   {'path': 'hello', component: RegistrationLoginComponent},
   {'path': 'home', component: HomeComponent},
-  {'path': 'sprintboard', component: KanbanBoardComponent},
+  {'path': 'sprintboard/:projectId/:sprintId', component: KanbanBoardComponent},
   { 'path': 'projectView/:id', component: ProjectViewComponent},
   { 'path': 'sprint/:projectId', component: SprintComponent, children:[
     {'path':'sprint-user-story/:sprintId', component:SprintUserstoryComponent}

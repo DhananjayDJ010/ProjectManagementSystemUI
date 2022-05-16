@@ -99,15 +99,15 @@
           <span *ngIf="!sprint.sprintActive">INACTIVE</span>
         </td>
         <td>
-          <!-- <span *ngIf="checkActiveStatus(sprint) === -1"></span> -->
-          <button
+          <span *ngIf="checkActiveStatus(sprint) === -1"></span>
+          <!-- <button
             *ngIf="checkActiveStatus(sprint) === -1"
             pButton
             pRipple
             type="button"
             label="Edit Sprint"
             (click)="updateSprintDetails(sprint)"
-          ></button>
+          ></button> -->
           <button
             *ngIf="checkActiveStatus(sprint) === 1"
             pButton
@@ -122,16 +122,74 @@
             pRipple
             type="button"
             class="p-button-secondary"
-            label="Stop Sprint"
+            icon="pi pi-stop-circle"
+            pTooltip="Stop Sprint"
+            tooltipPosition="left"
             (click)="toggleSprintStatus(sprint.id, sprint)"
+          ></button>
+          <span style="margin-left: 3px; margin-right: 3px"></span>
+          <button
+            *ngIf="checkActiveStatus(sprint) === 0"
+            pButton
+            pRipple
+            type="button"
+            class="p-button-help"
+            icon="pi pi-plus-circle"
+            pTooltip="Add Userstories"
+            tooltipPosition="right"
+            (click)="getBacklog()"
+          ></button>
+          <span style="margin-left: 3px; margin-right: 3px"></span>
+          <button
+            *ngIf="checkActiveStatus(sprint) === 0"
+            pButton
+            pRipple
+            type="button"
+            class="p-button-outlined"
+            icon="pi pi-arrow-circle-right"
+            pTooltip="Kanban board"
+            tooltipPosition="right"
+            (click)="goToKanbanBoard(sprint.id)"
           ></button>
         </td>
       </tr>
     </ng-template>
   </p-table>
+  <p-dialog
+    header="Backlog User Stories"
+    [(visible)]="showBacklogpopup"
+    [style]="{ height: '30vh', width: '40vw' }"
+    [modal]="true"
+  >
+    <div class="grid">
+      <div class="col">
+        <label><strong>User story names:</strong> </label>
+        <p-multiSelect
+          [options]="backlogStories"
+          [(ngModel)]="selectedBacklog"
+          optionLabel="name"
+          [virtualScroll]="true"
+          appendTo="body"
+          [maxSelectedLabels]="4"
+        ></p-multiSelect>
+      </div>
+      <div class="col">
+         <button
+            pButton
+            pRipple
+            type="button"
+            class="p-button-help"
+            icon="pi pi-plus-circle"
+            label="Add Userstories"
+            (click)="addUserstories()"
+          ></button>
+      </div>
+    </div>
+  </p-dialog>
 </div>
 <app-sprint-userstory
   *ngIf="selectedSprint !== -1"
   [sprintId]="selectedSprint"
+  (backtoSprint)="showSprintPage($event)"
 ></app-sprint-userstory>
 <!-- <router-outlet></router-outlet> -->

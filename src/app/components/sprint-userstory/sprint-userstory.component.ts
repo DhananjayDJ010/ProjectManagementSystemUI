@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SprintUserStory } from 'src/model/sprintUserstory';
 import { SprintUserStoryChild } from 'src/model/SprintUserStoryChild';
 import SprintService from 'src/service/sprint.service';
@@ -10,6 +10,7 @@ import SprintService from 'src/service/sprint.service';
 })
 export class SprintUserstoryComponent implements OnInit {
   @Input() sprintId: any;
+  @Output() backtoSprint: EventEmitter<any> = new EventEmitter();
   sprintUserStories: SprintUserStory[] = [];
   selectedUserStory: SprintUserStory = new SprintUserStory();
   selectedRowNumber = -1;
@@ -17,6 +18,10 @@ export class SprintUserstoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserStoriesForSprint(this.sprintId);
+  }
+
+  goToSprint(){
+    this.backtoSprint.emit(null);
   }
 
   getUserStoriesForSprint(sprintId: number) {
@@ -32,7 +37,6 @@ export class SprintUserstoryComponent implements OnInit {
             data: [child],
           };
         });
-        console.log(this.sprintUserStories);
       });
   }
 
