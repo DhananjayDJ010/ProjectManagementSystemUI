@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BacklogComponent } from './components/backlog/backlog/backlog.component';
 import { HomeComponent } from './components/home/home.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { 'path': 'sprint/:projectId', component: SprintComponent, children:[
     {'path':'sprint-user-story/:sprintId', component:SprintUserstoryComponent}
   ] },
+  {'path': 'backlog', component: BacklogComponent}
 ];
 
 @NgModule({
