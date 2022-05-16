@@ -1,0 +1,137 @@
+<div *ngIf="selectedSprint === -1">
+  <div
+    class="grid"
+    *ngIf="userRole === 'PROJECT_MANAGER' || userRole === 'SCRUM_MASTER'"
+  >
+    <div class="col">
+      <input
+        type="text"
+        pInputText
+        placeholder="Name"
+        [(ngModel)]="newSprint.name"
+      />
+    </div>
+    <div class="col">
+      <p-calendar
+        [(ngModel)]="newSprint.startDate"
+        placeholder="Start Date"
+      ></p-calendar>
+    </div>
+    <div class="col">
+      <p-calendar
+        [(ngModel)]="newSprint.endDate"
+        placeholder="End Date"
+      ></p-calendar>
+    </div>
+    <div class="col">
+      <p-dropdown
+        [options]="sprintStatus"
+        [(ngModel)]="selectedStatusObj"
+        placeholder="Select status"
+        optionLabel="label"
+        (onChange)="getSprintStatus()"
+      ></p-dropdown>
+    </div>
+    <div class="col">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Add Sprint"
+        (click)="createNewSprint()"
+      ></button>
+    </div>
+  </div>
+  <h1 *ngIf="sprintDetails.length === 0">No sprints currently added</h1>
+  <p-table *ngIf="sprintDetails.length > 0" [value]="sprintDetails">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Sprint Id</th>
+        <th>Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Status</th>
+        <th>Start/End</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-sprint>
+      <tr>
+        <td>
+          <!-- <a
+            [routerLink]="[
+              'sprint/',
+              projectId,
+              '/sprint-user-story',
+              sprint.id
+            ]"
+            >{{ sprint.id }}</a
+          > -->
+          <p-button
+            [label]="sprint.id"
+            styleClass="p-button-link"
+            (click)="selectedSprint = sprint.id"
+          ></p-button>
+        </td>
+        <!-- <td>{{ sprint.name }}</td> -->
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input type="text" pInputText [(ngModel)]="sprint.name" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ sprint.name }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-calendar [(ngModel)]="sprint.startDate"></p-calendar>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ sprint.startDate | date }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>{{ sprint.endDate | date }}</td>
+        <td>
+          <span *ngIf="sprint.sprintActive">ACTIVE</span>
+          <span *ngIf="!sprint.sprintActive">INACTIVE</span>
+        </td>
+        <td>
+          <!-- <span *ngIf="checkActiveStatus(sprint) === -1"></span> -->
+          <button
+            *ngIf="checkActiveStatus(sprint) === -1"
+            pButton
+            pRipple
+            type="button"
+            label="Edit Sprint"
+            (click)="updateSprintDetails(sprint)"
+          ></button>
+          <button
+            *ngIf="checkActiveStatus(sprint) === 1"
+            pButton
+            pRipple
+            type="button"
+            label="Start Sprint"
+            (click)="toggleSprintStatus(sprint.id, sprint)"
+          ></button>
+          <button
+            *ngIf="checkActiveStatus(sprint) === 0"
+            pButton
+            pRipple
+            type="button"
+            class="p-button-secondary"
+            label="Stop Sprint"
+            (click)="toggleSprintStatus(sprint.id, sprint)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<app-sprint-userstory
+  *ngIf="selectedSprint !== -1"
+  [sprintId]="selectedSprint"
+></app-sprint-userstory>
+<!-- <router-outlet></router-outlet> -->

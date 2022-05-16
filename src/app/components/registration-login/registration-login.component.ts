@@ -43,6 +43,7 @@ export class RegistrationLoginComponent implements OnInit {
       localStorage.setItem("loggedInEmailId",responseBody.emailId);
       localStorage.setItem("loggedInUserRole",responseBody.userRole);
       localStorage.setItem("loggedInUserId",responseBody.userId);
+      localStorage.setItem("loggedInProjectRoles",JSON.stringify(responseBody.projectRoles));
       this.router.navigate(["home"])
     })
   }

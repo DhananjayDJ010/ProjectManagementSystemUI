@@ -19,6 +19,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import {CalendarModule} from 'primeng/calendar';
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
 import { FormsModule } from '@angular/forms';
 import RegistrationService from 'src/service/registration.service';
@@ -31,6 +34,10 @@ import { KanbanBoardComponent } from './components/kanban-board/kanban-board.com
 import { TaskCardComponent } from './components/kanban-board/task-card/task-card.component';
 import { BacklogComponent } from './components/backlog/backlog/backlog.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
+import { SprintComponent } from './components/sprint/sprint.component';
+import SprintService from 'src/service/sprint.service';
+import CollabRoleService from 'src/service/collabrole.service';
+import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-userstory.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +48,8 @@ import { ProjectViewComponent } from './components/project-view/project-view.com
     TaskCardComponent,
     BacklogComponent,
     ProjectViewComponent,
+    SprintComponent,
+    SprintUserstoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,13 +69,18 @@ import { ProjectViewComponent } from './components/project-view/project-view.com
     MessageModule,
     InputTextModule,
     CardModule,
-    DragDropModule
+    DragDropModule,
+    MenuModule,
+    MenubarModule,
+    CalendarModule
   ],
   providers: [
     RegistrationService,
     HomePageService,
     ManageUserService,
     ProjectService,
+    SprintService,
+    CollabRoleService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

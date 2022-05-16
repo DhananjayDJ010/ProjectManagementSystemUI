@@ -15,7 +15,8 @@ export class BacklogComponent implements OnInit {
   showCreateUserStoryPopup = false;
   showManageUserStoryPopup = false;
   userRole: any;
- 
+  selectedUserStory = new UserStory();
+  selectedRowNumber = -1;
 
   constructor(private projectService : ProjectService) { }
 
@@ -49,6 +50,14 @@ export class BacklogComponent implements OnInit {
   showManageUserStoryPopUp(userstory:UserStory){
     this.showManageUserStoryPopup =true;
 
+  }
+  rowSelected(rowIndex: number, selectedUserStory: UserStory) {
+    this.selectedUserStory = selectedUserStory;
+    if (this.selectedRowNumber === rowIndex) {
+      this.selectedRowNumber = -1;
+    } else {
+      this.selectedRowNumber = rowIndex;
+    }
   }
 
 }
