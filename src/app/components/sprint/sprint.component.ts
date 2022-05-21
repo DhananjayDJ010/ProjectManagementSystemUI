@@ -13,7 +13,7 @@ export class SprintComponent implements OnInit {
   constructor(
     private sprintService: SprintService,
     private collabRoleService: CollabRoleService,
-    private router:Router
+    private router: Router
   ) {}
   @Input() projectId!: string;
   sprintDetails: Sprint[] = [];
@@ -27,6 +27,7 @@ export class SprintComponent implements OnInit {
     { label: 'ACTIVE', value: true },
     { label: 'INACTIVE', value: false },
   ];
+  sprintIdToAddUserStories!:number;
   selectedStatusObj: any = this.sprintStatus[1];
   ngOnInit() {
     this.getAllSprintDetails();
@@ -115,7 +116,8 @@ export class SprintComponent implements OnInit {
     this.selectedSprint = -1;
   }
 
-  getBacklog() {
+  getBacklog(sprintId:number) {
+    this.sprintIdToAddUserStories = sprintId;
     this.sprintService
       .getUserStoriesInBacklog(this.projectId)
       .subscribe((response) => {
@@ -124,11 +126,19 @@ export class SprintComponent implements OnInit {
       });
   }
 
-  addUserstories(){
-    console.log(this.selectedBacklog);
+  addUserstories() {
+    let idList = this.selectedBacklog.map((backlog: any) => backlog.id);
+    let strIdList = idList.join(',');
+    this.sprintService
+      .addUserStoriesToSprint(
+        this.projectId,
+        this.sprintIdToAddUserStories,
+        strIdList
+      )
+      .subscribe((response) => console.log(response.body));
   }
 
-  goToKanbanBoard(sprintId:string){
-    this.router.navigate(['sprintboard',this.projectId,sprintId])
+  goToKanbanBoard(sprintId: string) {
+    this.router.navigate(['sprintboard', this.projectId, sprintId]);
   }
 }
