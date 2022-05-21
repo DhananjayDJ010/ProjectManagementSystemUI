@@ -16,7 +16,6 @@ const routes: Routes = [
   { 'path': 'sprint/:projectId', component: SprintComponent, children:[
     {'path':'sprint-user-story/:sprintId', component:SprintUserstoryComponent}
   ] },
-  {'path': 'backlog', component: BacklogComponent}
 ];
 
 @NgModule({
