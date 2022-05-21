@@ -24,6 +24,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
 import { FormsModule } from '@angular/forms';
@@ -78,7 +79,8 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
     CalendarModule,
     SplitButtonModule,
     TooltipModule,
-    MultiSelectModule
+    MultiSelectModule,
+    InputTextareaModule
   ],
   providers: [
     RegistrationService,

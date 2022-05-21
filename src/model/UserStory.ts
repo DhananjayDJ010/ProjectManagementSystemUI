@@ -11,4 +11,5 @@ export class UserStory{
     status!:string;
     priority!:string;
     isBacklog!:boolean;
+    projectId!:string;
 }
