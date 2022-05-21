@@ -24,6 +24,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { TabViewModule } from 'primeng/tabview';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
@@ -80,7 +81,8 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
     SplitButtonModule,
     TooltipModule,
     MultiSelectModule,
-    InputTextareaModule
+    InputTextareaModule,
+    TabViewModule
   ],
   providers: [
     RegistrationService,
