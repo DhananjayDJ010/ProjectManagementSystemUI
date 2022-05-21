@@ -137,7 +137,7 @@
             icon="pi pi-plus-circle"
             pTooltip="Add Userstories"
             tooltipPosition="right"
-            (click)="getBacklog()"
+            (click)="getBacklog(sprint.id)"
           ></button>
           <span style="margin-left: 3px; margin-right: 3px"></span>
           <button
@@ -174,15 +174,15 @@
         ></p-multiSelect>
       </div>
       <div class="col">
-         <button
-            pButton
-            pRipple
-            type="button"
-            class="p-button-help"
-            icon="pi pi-plus-circle"
-            label="Add Userstories"
-            (click)="addUserstories()"
-          ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          class="p-button-help"
+          icon="pi pi-plus-circle"
+          label="Add Userstories"
+          (click)="addUserstories()"
+        ></button>
       </div>
     </div>
   </p-dialog>

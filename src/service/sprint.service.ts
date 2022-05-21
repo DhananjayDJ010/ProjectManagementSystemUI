@@ -96,7 +96,11 @@ export default class SprintService {
     return userStories;
   }
 
-  updateSprintUserStory(projectId:string,sprintId: number, newSprint: SprintUserStory) {
+  updateSprintUserStory(
+    projectId: string,
+    sprintId: number,
+    newSprint: SprintUserStory
+  ) {
     let updateSprintRes = this.http.put(
       'http://localhost:9000/project-service/api/v1.0/project-tracker/update/user-story/' +
         sprintId,
@@ -111,6 +115,26 @@ export default class SprintService {
     );
     console.log(updateSprintRes);
     return updateSprintRes;
+  }
+
+  addUserStoriesToSprint(
+    projectId: string,
+    sprintId: number,
+    userstoryIds: string
+  ) {
+    let addSprintRes = this.http.post(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint/' + sprintId + '/user-stories',
+      userstoryIds,
+      {
+        observe: 'response',
+        headers: {
+          projectIds: projectId,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    console.log(addSprintRes);
+    return addSprintRes;
   }
 }
 
