@@ -98,12 +98,12 @@ export default class SprintService {
 
   updateSprintUserStory(
     projectId: string,
-    sprintId: number,
+    userStoryId: number,
     newSprint: SprintUserStory
   ) {
     let updateSprintRes = this.http.put(
       'http://localhost:9000/project-service/api/v1.0/project-tracker/update/user-story/' +
-        sprintId,
+        userStoryId,
       newSprint,
       {
         observe: 'response',

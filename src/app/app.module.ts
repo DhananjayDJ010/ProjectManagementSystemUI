@@ -43,6 +43,7 @@ import { SprintComponent } from './components/sprint/sprint.component';
 import SprintService from 'src/service/sprint.service';
 import CollabRoleService from 'src/service/collabrole.service';
 import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-userstory.component';
+import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
     ProjectViewComponent,
     SprintComponent,
     SprintUserstoryComponent,
+    SubtaskViewComponent,
   ],
   imports: [
     BrowserModule,
