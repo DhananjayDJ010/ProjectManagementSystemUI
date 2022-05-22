@@ -7,15 +7,24 @@ import { ProjectViewComponent } from './components/project-view/project-view.com
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
 import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-userstory.component';
 import { SprintComponent } from './components/sprint/sprint.component';
+import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
 
 const routes: Routes = [
-  {'path': 'hello', component: RegistrationLoginComponent},
-  {'path': 'home', component: HomeComponent},
-  {'path': 'sprintboard/:projectId/:sprintId', component: KanbanBoardComponent},
-  { 'path': 'projectView/:id', component: ProjectViewComponent},
-  { 'path': 'sprint/:projectId', component: SprintComponent, children:[
-    {'path':'sprint-user-story/:sprintId', component:SprintUserstoryComponent}
-  ] },
+  { path: 'hello', component: RegistrationLoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'sprintboard/:projectId/:sprintId', component: KanbanBoardComponent },
+  { path: 'projectView/:id', component: ProjectViewComponent },
+  { path: 'subtasks/:projectId/:sprintId/:userStoryId', component: SubtaskViewComponent },
+  {
+    path: 'sprint/:projectId',
+    component: SprintComponent,
+    children: [
+      {
+        path: 'sprint-user-story/:sprintId',
+        component: SprintUserstoryComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({

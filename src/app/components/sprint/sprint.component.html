@@ -190,6 +190,7 @@
 <app-sprint-userstory
   *ngIf="selectedSprint !== -1"
   [sprintId]="selectedSprint"
+  [projectId]="projectId"
   (backtoSprint)="showSprintPage($event)"
 ></app-sprint-userstory>
 <!-- <router-outlet></router-outlet> -->
