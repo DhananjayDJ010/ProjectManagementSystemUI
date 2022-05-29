@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { SubTask } from "src/model/SubTask";
 
 @Injectable({
-    providedIn : 'root'
+    providedIn: 'root',
 })
 export default class SubTaskService {
     constructor(private http: HttpClient) { }
@@ -11,7 +11,7 @@ export default class SubTaskService {
     createSubTask(createSubTask :SubTask, userStoryId :number,projectId:string){
 
         let newSubTaskDetails = this.http.post(
-            'http://localhost:9000/project-service/api/v1.0/project-tracler/create/user-story/'+userStoryId+'sub-task',
+            'http://localhost:9000/project-service/api/v1.0/project-tracker/create/user-story/'+userStoryId+'/sub-task',
             createSubTask,
             {
                 observe :'response',
@@ -27,7 +27,7 @@ export default class SubTaskService {
     updateSubTask(updateSubTask : SubTask, userStoryId:number, subTaskId :number,projectId:string){
 
         let updatedSubTask = this.http.put(
-            'http://localhost:9000/project-service/api/v1.0/project-tracler/create/user-story/'+userStoryId+'sub-task'
+            'http://localhost:9000/project-service/api/v1.0/project-tracker/create/user-story/'+userStoryId+'/sub-task/'
             + subTaskId,updateSubTask,
             {
                 observe :'response',
@@ -43,7 +43,7 @@ export default class SubTaskService {
     getSubTasks(userStoryId:number){
 
         let subTaskDetails = this.http.get(
-            'http://localhost:9000/project-service/api/v1.0/project-tracler/get-details/sub-task/'+userStoryId,
+            'http://localhost:9000/project-service/api/v1.0/project-tracker/get-details/sub-task/'+userStoryId,
             {
                
                 observe :'response',

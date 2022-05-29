@@ -21,7 +21,12 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { TabViewModule } from 'primeng/tabview';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TooltipModule } from 'primeng/tooltip';
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
 import { FormsModule } from '@angular/forms';
 import RegistrationService from 'src/service/registration.service';
@@ -29,14 +34,20 @@ import { AppHttpInterceptor } from 'src/service/interceptor.service';
 import { HomeComponent } from './components/home/home.component';
 import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
+import ProjectService from 'src/service/project.service';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { TaskCardComponent } from './components/kanban-board/task-card/task-card.component';
+import { BacklogComponent } from './components/backlog/backlog/backlog.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
 import { SprintComponent } from './components/sprint/sprint.component';
 import SprintService from 'src/service/sprint.service';
 import CollabRoleService from 'src/service/collabrole.service';
 import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-userstory.component';
 import { SubTaskComponent } from './components/sub-task/sub-task.component';
+import SubTaskService from 'src/service/sub-task.service';
+import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
+import { SubTaskViewService } from 'src/service/sub-task-view.service';
+
 
 @NgModule({
   declarations: [
@@ -45,10 +56,12 @@ import { SubTaskComponent } from './components/sub-task/sub-task.component';
     HomeComponent,
     KanbanBoardComponent,
     TaskCardComponent,
+    BacklogComponent,
     ProjectViewComponent,
     SprintComponent,
     SprintUserstoryComponent,
     SubTaskComponent,
+    SubtaskViewComponent
   ],
   imports: [
     BrowserModule,
@@ -71,16 +84,23 @@ import { SubTaskComponent } from './components/sub-task/sub-task.component';
     DragDropModule,
     MenuModule,
     MenubarModule,
-    CalendarModule
+    CalendarModule,
+    SplitButtonModule,
+    TooltipModule,
+    MultiSelectModule,
+    InputTextareaModule,
+    TabViewModule
   ],
   providers: [
     RegistrationService,
     HomePageService,
     ManageUserService,
+    ProjectService,
     SprintService,
     CollabRoleService,
-    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
+    SubTaskViewService,
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,3 +1,10 @@
-<p>{{projectId}}</p>
+<p>{{ projectId }}</p>
 <p-menubar [model]="items"></p-menubar>
-<app-sprint *ngIf="selectedItem === 'Sprint'" [projectId]="projectId"></app-sprint>
+<app-sprint
+  *ngIf="selectedItem === 'Sprint'"
+  [projectId]="projectId"
+></app-sprint>
+<app-backlog
+  *ngIf="selectedItem === 'Backlog'"
+  [projectId]="projectId"
+></app-backlog>

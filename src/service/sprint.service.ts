@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Sprint } from 'src/model/sprint';
+import { SprintUserStory } from 'src/model/sprintUserstory';
 
 @Injectable()
 export default class SprintService {
@@ -64,4 +65,76 @@ export default class SprintService {
     console.log(updateSprintRes);
     return updateSprintRes;
   }
+
+  getUserStoriesInBacklog(projectId: string) {
+    let userStories = this.http.get(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/backlog/user-story/' +
+        projectId,
+      {
+        observe: 'response',
+        headers: {
+          'content-type': 'application/json',
+          projectIds: projectId,
+        },
+      }
+    );
+    return userStories;
+  }
+
+  addFromBacklog(projectId: string) {
+    let userStories = this.http.get(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/backlog/user-story/' +
+        projectId,
+      {
+        observe: 'response',
+        headers: {
+          'content-type': 'application/json',
+          projectIds: projectId,
+        },
+      }
+    );
+    return userStories;
+  }
+
+  updateSprintUserStory(
+    projectId: string,
+    userStoryId: number,
+    newSprint: SprintUserStory
+  ) {
+    let updateSprintRes = this.http.put(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/update/user-story/' +
+        userStoryId,
+      newSprint,
+      {
+        observe: 'response',
+        headers: {
+          projectIds: projectId,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    console.log(updateSprintRes);
+    return updateSprintRes;
+  }
+
+  addUserStoriesToSprint(
+    projectId: string,
+    sprintId: number,
+    userstoryIds: string
+  ) {
+    let addSprintRes = this.http.post(
+      'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint/' + sprintId + '/user-stories',
+      userstoryIds,
+      {
+        observe: 'response',
+        headers: {
+          projectIds: projectId,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    console.log(addSprintRes);
+    return addSprintRes;
+  }
 }
+

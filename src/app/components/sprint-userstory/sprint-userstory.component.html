@@ -1,3 +1,12 @@
+<button
+  type="button"
+  pButton
+  pRipple
+  label="Back"
+  class="p-button-text p-button-rounded"
+  icon="pi pi-chevron-left"
+  (click)="goToSprint()"
+></button>
 <p-table
   [value]="sprintUserStories"
   dataKey="Name"
@@ -35,13 +44,13 @@
       <td>{{ userStory.status }}</td>
     </tr>
     <tr *ngIf="selectedRowNumber === rowIndex">
-      <td colspan="5">
+      <td colspan="6">
         <div class="grid">
-          <div class="col-10">
+          <div class="col-9">
             <strong>Acceptance Criteria : </strong
             >{{ selectedUserStory.acceptanceCriteria }}
           </div>
-          <div class="col-2">
+          <div class="col-1">
             <div class="grid">
               <div class="col-12">
                 <strong>Consumed Effort : </strong
@@ -57,8 +66,140 @@
               </div>
             </div>
           </div>
+
+          <div class="col-2">
+            <p-button
+              icon="pi pi-pencil"
+              (click)="showEditUserstoryPopup()"
+              label="Edit UserStory"
+              styleClass="p-button-text"
+            >
+            </p-button>
+
+            <p-button
+              icon="pi pi-list"
+              (click)="moveToBacklog()"
+              label="Move To Backlog"
+              styleClass="p-button-text"
+            >
+            </p-button>
+
+            <p-button
+              icon="pi pi-check-square"
+              (click)="goToSubtaskView()"
+              label="Manage Subtask"
+              styleClass="p-button-text"
+              *ngIf="userRole === 'PROJECT_MANAGER' || userRole === 'SCRUM_MASTER'"
+            >
+            </p-button>
+
+            <p-button
+              icon="pi pi-check-square"
+              (click)="goToSubtaskView()"
+              label="View Subtask"
+              styleClass="p-button-text"
+              *ngIf="userRole !== 'PROJECT_MANAGER' && userRole !== 'SCRUM_MASTER'"
+            >
+            </p-button>
+          </div>
         </div>
       </td>
     </tr>
   </ng-template>
 </p-table>
+<p-dialog
+  header="Edit UserStory"
+  [(visible)]="showEditUserstoryPopupCheck"
+  [style]="{ height: '95vh' }"
+  [modal]="true"
+>
+  <div class="field pad">
+    <strong>Name</strong><br />
+    <input
+      id="uname"
+      type="text"
+      pInputText
+      [(ngModel)]="selectedUserStory.name"
+      placeholder="UserStory Name"
+    />
+  </div>
+  <div class="field pad">
+    <strong>Priority</strong><br />
+    <p-dropdown
+      [options]="priorities"
+      [(ngModel)]="selectedUserStory.priority"
+    ></p-dropdown>
+  </div>
+  <div class="field pad">
+    <strong>Story Points</strong><br />
+    <input
+      id="ustorypoint"
+      type="text"
+      pInputText
+      [(ngModel)]="selectedUserStory.storyPoints"
+      placeholder="Story Points"
+    />
+  </div>
+
+  <div class="field pad">
+    <strong>Acceptance Criteria</strong><br />
+    <textarea
+      [rows]="5"
+      [cols]="25"
+      pInputTextarea
+      [(ngModel)]="selectedUserStory.acceptanceCriteria"
+      placeholder="Acceptance Criteria"
+    ></textarea>
+  </div>
+
+  <div class="field pad">
+    <strong>Assigned To</strong><br />
+    <p-dropdown
+      [options]="usersList"
+      [(ngModel)]="selectedUserId"
+      optionLabel="emailId"
+    ></p-dropdown>
+  </div>
+
+  <div class="field pad">
+    <strong>Status</strong><br />
+    <p-dropdown
+      [options]="statusArray"
+      [(ngModel)]="selectedStatus"
+    ></p-dropdown>
+  </div>
+
+  <div class="field pad">
+    <strong>Estimated Effort In Hours</strong><br />
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="selectedUserStory.estimatedEfforts"
+      placeholder="Estimated effort in hours"
+    />
+  </div>
+
+  <div class="field pad">
+    <strong>Consumed Effort In Hours</strong><br />
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="selectedUserStory.consumedEfforts"
+      placeholder="Consumed effort in hours"
+    />
+  </div>
+
+  <div class="field pad">
+    <p-button
+      icon="pi pi-pencil"
+      (click)="editUserStory()"
+      label="Edit UserStory"
+      styleClass="p-button-text"
+    >
+    </p-button>
+  </div>
+  <!-- <div class="field pad" *ngIf="managerUserAfterCreateProject">
+            <p-button icon="pi pi-chevron-circle-right" (click)="showUsersPopup(currentProjectId)" label="Manage Users" styleClass="p-button-text">
+            </p-button>
+        </div> -->
+</p-dialog>
