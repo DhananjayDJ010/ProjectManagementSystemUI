@@ -13,6 +13,7 @@ import SprintService from 'src/service/sprint.service';
 })
 export class SprintUserstoryComponent implements OnInit {
   @Input() sprintId: any;
+  @Input() sprintName: any;
   @Input() projectId: any;
   @Output() backtoSprint: EventEmitter<any> = new EventEmitter();
   sprintUserStories: SprintUserStory[] = [];
