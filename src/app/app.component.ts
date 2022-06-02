@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.state = event.url;
         console.log(this.state);
-        this.showMenuBar = this.state.includes('/hello');
+        this.showMenuBar = this.state.includes('/hello')
+        || this.state === '/';
       }
     });
   }
