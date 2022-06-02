@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { SprintUserStory } from 'src/model/sprintUserstory';
 import { SprintUserStoryChild } from 'src/model/SprintUserStoryChild';
 import CollabRoleService from 'src/service/collabrole.service';
@@ -31,7 +32,8 @@ export class SprintUserstoryComponent implements OnInit {
     private sprintService: SprintService,
     private manageUsers: ManageUserService,
     private collabRoleService: CollabRoleService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -102,6 +104,12 @@ export class SprintUserstoryComponent implements OnInit {
       )
       .subscribe((response) => {
         console.log(response.body);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Userstory details updated',
+        });
+        this.getUserStoriesForSprint(this.sprintId);
       });
   }
 
