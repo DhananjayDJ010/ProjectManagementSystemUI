@@ -49,18 +49,14 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
 import SubTaskService from 'src/service/sub-task.service';
 import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
 
-
-
-
 import { AppHttpErrorHandlingInterceptor } from 'src/service/interceptor.errorhandler';
 import { AuthGuardService } from 'src/service/guard';
 import LogoutService from 'src/service/logout.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-   RegistrationLoginComponent,
+    RegistrationLoginComponent,
     HomeComponent,
     KanbanBoardComponent,
     TaskCardComponent,
@@ -68,7 +64,7 @@ import LogoutService from 'src/service/logout.service';
     ProjectViewComponent,
     SprintComponent,
     SprintUserstoryComponent,
-    SubtaskViewComponent
+    SubtaskViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +102,9 @@ import LogoutService from 'src/service/logout.service';
     ProjectService,
     SprintService,
     CollabRoleService,
+    LogoutService,
+    MessageService,
+    AuthGuardService,
     SubTaskService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     {

@@ -8,7 +8,6 @@ import { ProjectViewComponent } from './components/project-view/project-view.com
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
 import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-userstory.component';
 import { SprintComponent } from './components/sprint/sprint.component';
-import { SubTaskComponent } from './components/sub-task/sub-task.component';
 import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
 
 const routes: Routes = [
