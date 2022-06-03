@@ -1,15 +1,1 @@
-<p-menubar *ngIf="!showMenuBar">
-  <ng-template pTemplate="start">
-    <h3>Project Management System</h3>
-  </ng-template>
-  <ng-template pTemplate="end">
-    <p-button
-      icon="pi pi-sign-out"
-      label="Logout"
-      iconPos="right"
-      (onClick)="logoutFunction()"
-    ></p-button>
-  </ng-template>
-</p-menubar>
-<p-toast position="top-center"></p-toast>
 <router-outlet></router-outlet>

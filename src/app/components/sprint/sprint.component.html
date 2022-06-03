@@ -69,7 +69,7 @@
           <p-button
             [label]="sprint.id"
             styleClass="p-button-link"
-            (click)="sprintSelected(sprint)"
+            (click)="selectedSprint = sprint.id"
           ></p-button>
         </td>
         <!-- <td>{{ sprint.name }}</td> -->
@@ -191,7 +191,6 @@
   *ngIf="selectedSprint !== -1"
   [sprintId]="selectedSprint"
   [projectId]="projectId"
-  [sprintName]="selectedSprintName"
   (backtoSprint)="showSprintPage($event)"
 ></app-sprint-userstory>
 <!-- <router-outlet></router-outlet> -->

@@ -23,7 +23,6 @@ export class SprintComponent implements OnInit {
   backlogStories: any = [];
   showBacklogpopup = false;
   selectedBacklog: any;
-  selectedSprintName:any;
   sprintStatus: any = [
     { label: 'ACTIVE', value: true },
     { label: 'INACTIVE', value: false },
@@ -141,11 +140,5 @@ export class SprintComponent implements OnInit {
 
   goToKanbanBoard(sprintId: string) {
     this.router.navigate(['sprintboard', this.projectId, sprintId]);
-  }
-
-  sprintSelected(sprintDetails:any){
-    this.selectedSprint = sprintDetails.id;
-    this.selectedSprintName = sprintDetails.name;
-    
   }
 }

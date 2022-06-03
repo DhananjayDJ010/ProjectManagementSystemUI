@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { UserStory } from 'src/model/UserStory';
 import ManageUserService from 'src/service/manage.users.service';
 import ProjectService from 'src/service/project.service';
@@ -26,8 +25,7 @@ export class BacklogComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private manageUsers: ManageUserService,
-    private messageService: MessageService
+    private manageUsers: ManageUserService
   ) {}
 
   ngOnInit(): void {
@@ -86,13 +84,5 @@ export class BacklogComponent implements OnInit {
         console.log('List for sending request');
         console.log(this.usersList);
       });
-  }
-
-  showViaService() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Service Message',
-      detail: 'Via MessageService',
-    });
   }
 }
