@@ -43,7 +43,11 @@ import { SprintComponent } from './components/sprint/sprint.component';
 import SprintService from 'src/service/sprint.service';
 import CollabRoleService from 'src/service/collabrole.service';
 import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-userstory.component';
+import { SubTaskComponent } from './components/sub-task/sub-task.component';
+import SubTaskService from 'src/service/sub-task.service';
 import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
+import { SubTaskViewService } from 'src/service/sub-task-view.service';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +60,8 @@ import { SubtaskViewComponent } from './components/subtask-view/subtask-view.com
     ProjectViewComponent,
     SprintComponent,
     SprintUserstoryComponent,
-    SubtaskViewComponent,
+    SubTaskComponent,
+    SubtaskViewComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ import { SubtaskViewComponent } from './components/subtask-view/subtask-view.com
     ProjectService,
     SprintService,
     CollabRoleService,
+    SubTaskViewService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

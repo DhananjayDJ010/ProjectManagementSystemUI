@@ -1,10 +1,12 @@
 export class SubTask{
-    name!: string;
-    userStoryId!: number;
-    assignedUser!: string;
-    estimatedEfforts!: number;
-    consumedEfforts!: number;
-    remainingEfforts!: number;
-    status!:string;
+
+    public id!:number
+        public name!:string;
+         public userStoryId!:number;
+        public assignedUser!:string;
+        public estimatedEfforts!:number;
+        public consumedEfforts!:number ;
+        public remainingEfforts!:number;
+        public status!:string;
 
 }
