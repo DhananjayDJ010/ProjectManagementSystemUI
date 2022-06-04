@@ -43,11 +43,9 @@ import { SprintComponent } from './components/sprint/sprint.component';
 import SprintService from 'src/service/sprint.service';
 import CollabRoleService from 'src/service/collabrole.service';
 import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-userstory.component';
-import { SubTaskComponent } from './components/sub-task/sub-task.component';
-import SubTaskService from 'src/service/sub-task.service';
+
 import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
 import { SubTaskViewService } from 'src/service/sub-task-view.service';
-
 
 @NgModule({
   declarations: [
@@ -60,8 +58,7 @@ import { SubTaskViewService } from 'src/service/sub-task-view.service';
     ProjectViewComponent,
     SprintComponent,
     SprintUserstoryComponent,
-    SubTaskComponent,
-    SubtaskViewComponent
+    SubtaskViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +86,7 @@ import { SubTaskViewService } from 'src/service/sub-task-view.service';
     TooltipModule,
     MultiSelectModule,
     InputTextareaModule,
-    TabViewModule
+    TabViewModule,
   ],
   providers: [
     RegistrationService,
