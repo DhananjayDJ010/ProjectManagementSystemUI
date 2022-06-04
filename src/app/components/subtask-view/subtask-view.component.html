@@ -1,148 +1,242 @@
 <div>
-    <h5>Subtasks For User-Story {{userStoryId}}</h5>
+  <h5>Subtasks For User-Story {{ userStoryId }}</h5>
 
-    <p-table [value]="subTaskDetails"
+  <p-table
+    [value]="subTaskDetails"
     rowExpandMode="single"
     dataKey="id"
-    editMode="row">
-        <ng-template pTemplate="header">
-            <tr>
-                
-                <th>Id</th>
-                <th>Name</th>
-                <th>Estimated Efforts</th>
-                <th>Consumed Efforts</th>
-                <th>Remaining Efforts</th>
-                <th>Assigned User</th>
-                <th>Status</th>
-                <th>Update</th>
-            </tr>
-
-        </ng-template>
-        <ng-template pTemplate="body" let-s let-editing="editing" let-ri="rowIndex">
-            <tr [pEditableRow]="s">
-                <td>{{s.id}}</td>
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="s.name">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{s.name}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="s.estimatedEfforts">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{s.estimatedEfforts}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="s.consumedEfforts">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{s.consumedEfforts}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                
-                
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="s.remainingEfforts">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{s.remainingEfforts}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <p-dropdown id="pAssignedUser"
-                            [options]="users" 
-                            [(ngModel)]="s.assignedUser">
-                            optionLabel="Assigned User"
-                            (onChange)="getUsersForProject(projectId)"
-                       </p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{s.assignedUser}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <p-dropdown id="pStatus" [options]="status" 
-                            [(ngModel)]="s.status">
-                            optionLabel="Status"
-                        </p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{s.status}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-               <td style="text-align:center">
-            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(s)" class="p-button-rounded p-button-text"></button>
-            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(s)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-pencil" (click)="onRowEditCancel(s,ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+    editMode="row"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Estimated Efforts</th>
+        <th>Consumed Efforts</th>
+        <th>Remaining Efforts</th>
+        <th>Assigned User</th>
+        <th>Status</th>
+        <th>Update</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-s let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="s">
+        <td>{{ s.id }}</td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText pInputText type="text" [(ngModel)]="s.name" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ s.name }}
+            </ng-template>
+          </p-cellEditor>
         </td>
-        </tr>
-        </ng-template>
-    </p-table><br>
-    <button pButton pRipple type="button" label="Create SubTask"
-    (click)="createSubTaskPopupModal()"></button>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                pInputText
+                type="text"
+                [(ngModel)]="s.estimatedEfforts"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ s.estimatedEfforts }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                pInputText
+                type="text"
+                [(ngModel)]="s.consumedEfforts"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ s.consumedEfforts }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                pInputText
+                type="text"
+                [(ngModel)]="s.remainingEfforts"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ s.remainingEfforts }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown
+                id="pAssignedUser"
+                [options]="users"
+                [(ngModel)]="s.assignedUser"
+              >
+                optionLabel="Assigned User"
+                (onChange)="getUsersForProject(projectId)"
+              </p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ s.assignedUser }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown
+                id="pStatus"
+                [options]="status"
+                [(ngModel)]="s.status"
+              >
+                optionLabel="Status"
+              </p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ s.status }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td style="text-align: center">
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditInit(s)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            icon="pi pi-check"
+            (click)="onRowEditSave(s)"
+            class="p-button-rounded p-button-text p-button-success p-mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditCancel(s, ri)"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template> </p-table
+  ><br />
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Create SubTask"
+    (click)="createSubTaskPopupModal()"
+  ></button>
 </div>
 
-<p-dialog header ="Create SubTask" [(visible)]="showCreateSubTaskPoup" [style]="{height:'60vh',width:'05vw-'}"
-[modal]="true">
-<div class="grid">
+<p-dialog
+  header="Create SubTask"
+  [(visible)]="showCreateSubTaskPoup"
+  [style]="{ height: '60vh', width: '05vw-' }"
+  [modal]="true"
+>
+  <div class="grid">
     <div class="col">
-        <input id="name" type="text" pInputText [(ngModel)]="newSubTaskDetails.name"
-        placeholder="SubTask Name">
-    </div><br>
-    <div class="col">
-        <input id="eEfforts" type="number" pInputNumber [(ngModel)]="newSubTaskDetails.estimatedEfforts"
-        placeholder="Estimated Efforts">
-    </div><br>
-    <div class="col">
-        <input id="cEfforts" type="number" pInputNumber [(ngModel)]="newSubTaskDetails.consumedEfforts"
-        placeholder="Consumed Efforts">
-    </div><br>
-    <div class="col">
-        <input id="rEfforts" type="number" pInputNumber [(ngModel)]="newSubTaskDetails.remainingEfforts"
-        placeholder="Remaining Efforts">
-    </div><br>
-    <div class="col">
-        <p-dropdown id="pAssignedUser"
-         [options]="users" 
-         [(ngModel)]="newSubTaskDetails.assignedUser">
-         optionLabel="Assigned User"
-         (onChange)="getUsersForProject(projectId)"
-    </p-dropdown>
-    </div><br>
-    <div class="col">
-        <p-dropdown id="pStatus" [options]="status" 
-        [(ngModel)]="newSubTaskDetails.status">
-        optionLabel="Status"
-    </p-dropdown>
-    </div><br>
-    <div class="col">
-       <p-button icon="pi pi-plus" (click)="createSubTask(newSubTaskDetails,userStoryId,projectId)" label ="Create" styleClass="p-button-text">
-     </p-button>      
+      <input
+        pInputText
+        id="name"
+        type="text"
+        pInputText
+        [(ngModel)]="newSubTaskDetails.name"
+        placeholder="SubTask Name"
+      />
     </div>
-</div>
+    <br />
+    <div class="col">
+      <input
+        pInputText
+        id="eEfforts"
+        type="number"
+        pInputNumber
+        [(ngModel)]="newSubTaskDetails.estimatedEfforts"
+        placeholder="Estimated Efforts"
+      />
+    </div>
+    <br />
+    <div class="col">
+      <input
+        pInputText
+        id="cEfforts"
+        type="number"
+        pInputNumber
+        [(ngModel)]="newSubTaskDetails.consumedEfforts"
+        placeholder="Consumed Efforts"
+      />
+    </div>
+    <br />
+    <div class="col">
+      <input
+        pInputText
+        id="rEfforts"
+        type="number"
+        pInputNumber
+        [(ngModel)]="newSubTaskDetails.remainingEfforts"
+        placeholder="Remaining Efforts"
+      />
+    </div>
+    <br />
+    <div class="col">
+      <p-dropdown
+        id="pAssignedUser"
+        [options]="users"
+        [(ngModel)]="newSubTaskDetails.assignedUser"
+      >
+        optionLabel="Assigned User" (onChange)="getUsersForProject(projectId)"
+      </p-dropdown>
+    </div>
+    <br />
+    <div class="col">
+      <p-dropdown
+        id="pStatus"
+        [options]="status"
+        [(ngModel)]="newSubTaskDetails.status"
+      >
+        optionLabel="Status"
+      </p-dropdown>
+    </div>
+    <br />
+    <div class="col">
+      <p-button
+        icon="pi pi-plus"
+        (click)="createSubTask(newSubTaskDetails, userStoryId, projectId)"
+        label="Create"
+        styleClass="p-button-text"
+      >
+      </p-button>
+    </div>
+  </div>
 </p-dialog>
