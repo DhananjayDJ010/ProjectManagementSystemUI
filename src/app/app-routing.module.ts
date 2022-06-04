@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from 'src/service/guard';
 import { BacklogComponent } from './components/backlog/backlog/backlog.component';
 import { HomeComponent } from './components/home/home.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
@@ -10,7 +11,11 @@ import { SprintComponent } from './components/sprint/sprint.component';
 import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
 
 const routes: Routes = [
-  { path: 'hello', component: RegistrationLoginComponent },
+  {
+    path: 'hello',
+    component: RegistrationLoginComponent,
+    canActivate: [AuthGuardService],
+  },
   { path: 'home', component: HomeComponent },
   { path: 'sprintboard/:projectId/:sprintId', component: KanbanBoardComponent },
   { path: 'projectView/:id', component: ProjectViewComponent },

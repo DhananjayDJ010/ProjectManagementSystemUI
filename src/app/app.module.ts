@@ -25,8 +25,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TabViewModule } from 'primeng/tabview';
+import { ToastModule } from 'primeng/toast';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
+import { MessageService } from 'primeng/api';
 import { RegistrationLoginComponent } from './components/registration-login/registration-login.component';
 import { FormsModule } from '@angular/forms';
 import RegistrationService from 'src/service/registration.service';
@@ -46,6 +48,9 @@ import { SprintUserstoryComponent } from './components/sprint-userstory/sprint-u
 
 import { SubtaskViewComponent } from './components/subtask-view/subtask-view.component';
 import { SubTaskViewService } from 'src/service/sub-task-view.service';
+import { AuthGuardService } from 'src/service/guard';
+import LogoutService from 'src/service/logout.service';
+import { AppHttpErrorHandlingInterceptor } from 'src/service/interceptor.errorhandler';
 
 @NgModule({
   declarations: [
@@ -87,6 +92,7 @@ import { SubTaskViewService } from 'src/service/sub-task-view.service';
     MultiSelectModule,
     InputTextareaModule,
     TabViewModule,
+    ToastModule,
   ],
   providers: [
     RegistrationService,
@@ -96,7 +102,15 @@ import { SubTaskViewService } from 'src/service/sub-task-view.service';
     SprintService,
     CollabRoleService,
     SubTaskViewService,
+    MessageService,
+    AuthGuardService,
+    LogoutService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpErrorHandlingInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

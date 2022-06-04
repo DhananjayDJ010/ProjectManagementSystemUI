@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Login } from "src/model/login";
 import { Registration } from "src/model/Registration";
 
 @Injectable()
@@ -16,7 +17,7 @@ export default class RegistrationService{
         return signUpDetails;
     }
 
-    login(registrationRequest:Registration){
+    login(registrationRequest:Login){
         let signInDetails = this.http.post("http://localhost:9000/registration-service/api/v1.0/project-tracker/user/login", registrationRequest, {
         observe:'response',
         headers:{
