@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { SubTask } from 'src/model/SubTask';
 import CollabRoleService from 'src/service/collabrole.service';
 import ManageUserService from 'src/service/manage.users.service';
@@ -16,7 +17,8 @@ export class SubtaskViewComponent implements OnInit {
     public service: SubTaskViewService,
     private route: ActivatedRoute,
     private getUsers: ManageUserService,
-    private collabRoleService: CollabRoleService
+    private collabRoleService: CollabRoleService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,12 @@ export class SubtaskViewComponent implements OnInit {
       .createSubTask(subTask, userStoryId, projectId)
       .subscribe((response) => {
         console.log(response.body);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Subtask created for userstory',
+        });
+        this.getSubTasks(this.userStoryId);
       });
   }
 

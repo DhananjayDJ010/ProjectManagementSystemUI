@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Project } from 'src/model/Project';
 import HomePageService from 'src/service/homepage.service';
 import ManageUserService from 'src/service/manage.users.service';
@@ -11,6 +12,7 @@ import ManageUserService from 'src/service/manage.users.service';
 })
 export class HomeComponent implements OnInit {
   userRole: any;
+  emailId: any;
   managedProjects: any;
   involvedProjects: any;
   filteredInvolvedProjectIds: any;
@@ -36,11 +38,13 @@ export class HomeComponent implements OnInit {
     'PROJECT_MANAGER',
   ];
   projectTypes = ['BUSINESS', 'SUPPORT'];
+  loadDataFlag = false;
 
   constructor(
     private home: HomePageService,
     private manageUsers: ManageUserService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +71,7 @@ export class HomeComponent implements OnInit {
       });
 
       this.userRole = userRole;
+      this.emailId = emailId;
     }
   }
   manageUsersForProjects() {
@@ -75,7 +80,14 @@ export class HomeComponent implements OnInit {
         { projectAccessRequests: this.usersList },
         this.currentProjectId
       )
-      .subscribe((response) => console.log(response.body));
+      .subscribe((response) => {
+        console.log(response.body);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Project team modified',
+        });
+      });
   }
 
   showUsersPopup(projectId: string, projectName: string, manageUsers: boolean) {
@@ -167,9 +179,19 @@ export class HomeComponent implements OnInit {
         this.currentProjectId = creationResponse.projectData.projectId;
         this.managerUserAfterCreateProject = true;
         this.loadData();
+        this.loadDataFlag = true;
+        if (this.loadDataFlag) {
+          this.updateRoleList();
+          this.loadDataFlag = false;
+        }
       },
       (err) => {
         console.log('Error while creating project');
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Failure',
+          detail: 'Project creation failed',
+        });
       }
     );
   }
@@ -199,5 +221,16 @@ export class HomeComponent implements OnInit {
           });
       }
     }
+  }
+
+  updateRoleList() {
+    this.home.getInvolvedProjects(this.emailId).subscribe((response) => {
+      console.log('Update roles after creating project', response.body);
+      let res: any = response.body;
+      localStorage.setItem(
+        'loggedInProjectRoles',
+        JSON.stringify(res.projectRoles)
+      );
+    });
   }
 }

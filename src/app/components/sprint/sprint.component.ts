@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Sprint } from 'src/model/sprint';
 import CollabRoleService from 'src/service/collabrole.service';
 import SprintService from 'src/service/sprint.service';
@@ -13,7 +14,8 @@ export class SprintComponent implements OnInit {
   constructor(
     private sprintService: SprintService,
     private collabRoleService: CollabRoleService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
   @Input() projectId!: string;
   sprintDetails: Sprint[] = [];
@@ -23,12 +25,12 @@ export class SprintComponent implements OnInit {
   backlogStories: any = [];
   showBacklogpopup = false;
   selectedBacklog: any;
-  selectedSprintName:any;
+  selectedSprintName: any;
   sprintStatus: any = [
     { label: 'ACTIVE', value: true },
     { label: 'INACTIVE', value: false },
   ];
-  sprintIdToAddUserStories!:number;
+  sprintIdToAddUserStories!: number;
   selectedStatusObj: any = this.sprintStatus[1];
   ngOnInit() {
     this.getAllSprintDetails();
@@ -68,6 +70,7 @@ export class SprintComponent implements OnInit {
         .createSprint(this.newSprint, this.projectId)
         .subscribe((response) => {
           console.log(response.body);
+          this.getAllSprintDetails();
         });
     }
   }
@@ -117,7 +120,7 @@ export class SprintComponent implements OnInit {
     this.selectedSprint = -1;
   }
 
-  getBacklog(sprintId:number) {
+  getBacklog(sprintId: number) {
     this.sprintIdToAddUserStories = sprintId;
     this.sprintService
       .getUserStoriesInBacklog(this.projectId)
@@ -136,16 +139,22 @@ export class SprintComponent implements OnInit {
         this.sprintIdToAddUserStories,
         strIdList
       )
-      .subscribe((response) => console.log(response.body));
+      .subscribe((response) => {
+        console.log(response.body);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Userstories added to sprint',
+        });
+      });
   }
 
   goToKanbanBoard(sprintId: string) {
     this.router.navigate(['sprintboard', this.projectId, sprintId]);
   }
 
-  sprintSelected(sprintDetails:any){
+  sprintSelected(sprintDetails: any) {
     this.selectedSprint = sprintDetails.id;
     this.selectedSprintName = sprintDetails.name;
-    
   }
 }

@@ -53,7 +53,21 @@ export class BacklogComponent implements OnInit {
     console.log([formattedUS]);
     this.projectService
       .createUserStory([formattedUS], this.projectId)
-      .subscribe((response) => console.log(response.body));
+      .subscribe((response) => {
+        console.log(response.body);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'User Story Added To Backlog',
+        });
+        this.projectService
+          .getStoriesInBacklog(this.projectId)
+          .subscribe((response) => {
+            console.log('getStoriesInBacklog call success');
+            console.log(response.body);
+            this.backlogStories = response.body;
+          });
+      });
   }
 
   showCreateUserStoryModal() {
