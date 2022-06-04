@@ -127,6 +127,12 @@ export class SprintUserstoryComponent implements OnInit {
       )
       .subscribe((response) => {
         console.log(response.body);
+        this.getUserStoriesForSprint(this.sprintId);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Userstory moved to backlog',
+        });
       });
   }
 
