@@ -55,7 +55,9 @@ export class HomeComponent implements OnInit {
       console.log('Involved projects call success');
       console.log(response.body);
       this.involvedProjects = response.body;
-      this.filterInvolvedProjects();
+      console.log('Involved projects', this.involvedProjects);
+      if (this.involvedProjects !== undefined && this.involvedProjects !== null)
+        this.filterInvolvedProjects();
     });
     if (userRole === 'MANAGER') {
       this.home.getManagedProjects(userId).subscribe((response) => {
@@ -76,7 +78,7 @@ export class HomeComponent implements OnInit {
       .subscribe((response) => console.log(response.body));
   }
 
-  showUsersPopup(projectId: string, projectName: string, manageUsers:boolean) {
+  showUsersPopup(projectId: string, projectName: string, manageUsers: boolean) {
     this.currentProjectId = projectId;
     this.showCreateProjectPopup = false;
     this.manageUsers.getUsersForProject(projectId).subscribe((response) => {
@@ -94,13 +96,11 @@ export class HomeComponent implements OnInit {
       this.manageUsersPopupTitle += projectName;
       this.viewUsersPopupTitle = 'View Users - ';
       this.viewUsersPopupTitle += projectName;
-      if(manageUsers){
+      if (manageUsers) {
         this.showUsersPopupCheck = true;
-      }
-      else{
+      } else {
         this.showViewUsersPopupCheck = true;
       }
-      
     });
   }
 
@@ -179,19 +179,25 @@ export class HomeComponent implements OnInit {
   }
 
   filterInvolvedProjects() {
-    let filteredInvolvedProjectIds = this.involvedProjects.projectRoles
-      .filter((project: any) => project.collaborationRole !== 'PROJECT_MANAGER')
-      .map((project: any) => project.projectId);
-    this.filteredInvolvedProjectIds = filteredInvolvedProjectIds.join(',');
-    console.log(this.filteredInvolvedProjectIds);
-    this.manageUsers
-      .getProjectDetailsFromProjectIds(this.filteredInvolvedProjectIds)
-      .subscribe((response) => {
-        this.filteredInvolvedProjects = response.body;
-        console.log(
-          'Involved projects filtered',
-          this.filteredInvolvedProjects
-        );
-      });
+    if (this.involvedProjects !== undefined && this.involvedProjects !== null) {
+      let filteredInvolvedProjectIds = this.involvedProjects.projectRoles
+        .filter(
+          (project: any) => project.collaborationRole !== 'PROJECT_MANAGER'
+        )
+        .map((project: any) => project.projectId);
+      this.filteredInvolvedProjectIds = filteredInvolvedProjectIds.join(',');
+      console.log(this.filteredInvolvedProjectIds);
+      if (this.filterInvolvedProjects.length > 0) {
+        this.manageUsers
+          .getProjectDetailsFromProjectIds(this.filteredInvolvedProjectIds)
+          .subscribe((response) => {
+            this.filteredInvolvedProjects = response.body;
+            console.log(
+              'Involved projects filtered',
+              this.filteredInvolvedProjects
+            );
+          });
+      }
+    }
   }
 }
