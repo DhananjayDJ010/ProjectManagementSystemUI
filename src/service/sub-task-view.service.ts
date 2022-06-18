@@ -14,7 +14,7 @@ export class SubTaskViewService {
     projectId: string
   ) {
     let newSubTaskDetails = this.http.post(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/create/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/create/user-story/' +
         userStoryId +
         '/' +
         'sub-task',
@@ -37,7 +37,7 @@ export class SubTaskViewService {
     projectId: string
   ) {
     let updatedSubTask = this.http.put(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/create/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/create/user-story/' +
         userStoryId +
         '/sub-task/' +
         subTaskId,
@@ -55,7 +55,7 @@ export class SubTaskViewService {
 
   getSubTasks(userStoryId: number) {
     let subTaskDetails = this.http.get(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/get-details/sub-task/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-details/sub-task/' +
         userStoryId,
       {
         observe: 'response',

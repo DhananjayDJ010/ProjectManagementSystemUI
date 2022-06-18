@@ -209,7 +209,7 @@ export class HomeComponent implements OnInit {
         .map((project: any) => project.projectId);
       this.filteredInvolvedProjectIds = filteredInvolvedProjectIds.join(',');
       console.log(this.filteredInvolvedProjectIds);
-      if (this.filterInvolvedProjects.length > 0) {
+      if (this.filteredInvolvedProjectIds.length > 0) {
         this.manageUsers
           .getProjectDetailsFromProjectIds(this.filteredInvolvedProjectIds)
           .subscribe((response) => {

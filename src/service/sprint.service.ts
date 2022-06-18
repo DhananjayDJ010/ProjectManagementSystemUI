@@ -8,7 +8,7 @@ export default class SprintService {
   constructor(private http: HttpClient) {}
   createSprint(newSprint: Sprint, projectId: string) {
     let newSprintDetails = this.http.post(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint',
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/add/sprint',
       newSprint,
       {
         observe: 'response',
@@ -23,7 +23,7 @@ export default class SprintService {
 
   getAllSprintDetails(projectId: string) {
     let sprintDetails = this.http.get(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/get-details/sprints/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-details/sprints/' +
         projectId,
       {
         observe: 'response',
@@ -37,7 +37,7 @@ export default class SprintService {
 
   getUserStoriesForSprint(sprintId: number) {
     let userStories = this.http.get(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/get-details/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-details/user-story/' +
         sprintId,
       {
         observe: 'response',
@@ -51,7 +51,7 @@ export default class SprintService {
 
   updateSprint(projectId: string, sprintId: number, newSprint: Sprint) {
     let updateSprintRes = this.http.put(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/add/sprint/' +
         sprintId,
       newSprint,
       {
@@ -68,7 +68,7 @@ export default class SprintService {
 
   getUserStoriesInBacklog(projectId: string) {
     let userStories = this.http.get(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/backlog/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/backlog/user-story/' +
         projectId,
       {
         observe: 'response',
@@ -83,7 +83,7 @@ export default class SprintService {
 
   addFromBacklog(projectId: string) {
     let userStories = this.http.get(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/backlog/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/backlog/user-story/' +
         projectId,
       {
         observe: 'response',
@@ -102,7 +102,7 @@ export default class SprintService {
     newSprint: SprintUserStory
   ) {
     let updateSprintRes = this.http.put(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/update/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/update/user-story/' +
         userStoryId,
       newSprint,
       {
@@ -123,7 +123,9 @@ export default class SprintService {
     userstoryIds: string
   ) {
     let addSprintRes = this.http.post(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/add/sprint/' + sprintId + '/user-stories',
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/add/sprint/' +
+        sprintId +
+        '/user-stories',
       userstoryIds,
       {
         observe: 'response',
@@ -137,4 +139,3 @@ export default class SprintService {
     return addSprintRes;
   }
 }
-

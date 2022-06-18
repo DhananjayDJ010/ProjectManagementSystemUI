@@ -21,7 +21,7 @@ export default class ManageUserService {
     };
 
     let manageUsers = this.http.post(
-      'http://localhost:9000/user-service/api/v1.0/project-tracker/manager/manage-user',
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/manager/manage-user',
       usersList,
       {
         observe: 'response',
@@ -37,7 +37,7 @@ export default class ManageUserService {
 
   getUsersForProject(projectId: string) {
     let getUsersInProj = this.http.get(
-      'http://localhost:9000/registration-service/api/v1.0/project-tracker/get-users',
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-users',
       {
         observe: 'response',
         headers: {
@@ -51,7 +51,7 @@ export default class ManageUserService {
 
   getAllUsers() {
     let getAllUsers = this.http.get(
-      'http://localhost:9000/registration-service/api/v1.0/project-tracker/get-all-users',
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-all-users',
       {
         observe: 'response',
         headers: {
@@ -64,7 +64,7 @@ export default class ManageUserService {
 
   getProjectDetailsFromProjectIds(projectIds: string) {
     let getProjectDetails = this.http.post(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/get-details/project',
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-details/project',
       projectIds,
       {
         observe: 'response',

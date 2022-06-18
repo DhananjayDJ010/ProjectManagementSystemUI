@@ -8,7 +8,7 @@ export default class ProjectService {
   constructor(private http: HttpClient) {}
   createUserStory(userStory: UserStory[], projectId: string) {
     let createUserStoryResponse = this.http.post(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/create/user-stories',
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/create/user-stories',
       userStory,
       {
         observe: 'response',
@@ -20,7 +20,7 @@ export default class ProjectService {
 
   getStoriesInBacklog(projectId: string) {
     let getStoriesInBacklogResponse = this.http.get(
-      'http://localhost:9000/project-service/api/v1.0/project-tracker/backlog/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/backlog/user-story/' +
         projectId,
       {
         observe: 'response',
@@ -39,7 +39,7 @@ export default class ProjectService {
     userStoryId: string
   ) {
     let updateUserStoryResponse = this.http.post(
-      'http://localhost:9000/user-service/api/v1.0/project-tracker/update/user-stories' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/update/user-stories' +
         userStoryId,
       userStory,
       {
@@ -52,7 +52,7 @@ export default class ProjectService {
 
   crateSubTask(subTask: SubTask, projectId: string, userStoryId: string) {
     let crateSubTaskResponse = this.http.post(
-      'http://localhost:9000/user-service/api/v1.0/project-tracker/create/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/create/user-story/' +
         userStoryId +
         '/sub-task',
       subTask,
@@ -71,7 +71,7 @@ export default class ProjectService {
     subTaskId: string
   ) {
     let updateSubTaskResponse = this.http.post(
-      'http://localhost:9000/user-service/api/v1.0/project-tracker/create/user-story/' +
+      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/create/user-story/' +
         userStoryId +
         '/sub-task' +
         subTaskId,
