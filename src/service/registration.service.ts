@@ -8,7 +8,7 @@ export default class RegistrationService {
   constructor(private http: HttpClient) {}
   signup(registrationRequest: Registration) {
     let signUpDetails = this.http.post(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/register',
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/register',
       registrationRequest,
       {
         headers: {
@@ -23,7 +23,7 @@ export default class RegistrationService {
 
   login(registrationRequest: Login) {
     let signInDetails = this.http.post(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/login',
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/login',
       registrationRequest,
       {
         observe: 'response',

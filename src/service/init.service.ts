@@ -6,7 +6,7 @@ export default class InitService {
   constructor(private http: HttpClient) {}
   registerHello() {
     let hello = this.http.get(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/registration/hello',
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/registration/hello',
       {
         observe: 'response',
       }
@@ -17,7 +17,7 @@ export default class InitService {
 
   userHello() {
     let hello = this.http.get(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/hello',
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/hello',
       {
         observe: 'response',
       }
@@ -28,7 +28,7 @@ export default class InitService {
 
   projectHello() {
     let hello = this.http.get(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/project/hello',
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/project/hello',
       {
         observe: 'response',
       }

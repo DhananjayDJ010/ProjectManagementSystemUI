@@ -7,7 +7,7 @@ export default class HomePageService {
   constructor(private http: HttpClient) {}
   getManagedProjects(managerId: string) {
     let managedProjects = this.http.get(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/project/managed/' +
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/project/managed/' +
         managerId,
       {
         observe: 'response',
@@ -21,7 +21,7 @@ export default class HomePageService {
 
   getInvolvedProjects(emailId: string) {
     let involvedProjects = this.http.get(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/get-details/' +
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/user/get-details/' +
         emailId,
       {
         observe: 'response',
@@ -35,7 +35,7 @@ export default class HomePageService {
 
   createProject(project: Project) {
     let createProjectResponse = this.http.post(
-      'https://mwwtugllg3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/manager/create-project',
+      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/manager/create-project',
       project,
       {
         observe: 'response',
