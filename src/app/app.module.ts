@@ -51,6 +51,7 @@ import { SubTaskViewService } from 'src/service/sub-task-view.service';
 import { AuthGuardService } from 'src/service/guard';
 import LogoutService from 'src/service/logout.service';
 import { AppHttpErrorHandlingInterceptor } from 'src/service/interceptor.errorhandler';
+import InitService from 'src/service/init.service';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { AppHttpErrorHandlingInterceptor } from 'src/service/interceptor.errorha
     MessageService,
     AuthGuardService,
     LogoutService,
+    InitService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,

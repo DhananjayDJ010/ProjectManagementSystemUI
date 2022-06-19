@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import InitService from 'src/service/init.service';
 import LogoutService from 'src/service/logout.service';
 
 @Component({
@@ -13,9 +14,18 @@ export class AppComponent implements OnInit {
   state!: any;
   showMenuBar = true;
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('Warm up');
+    this.init.projectHello().subscribe((response) => console.log(response.body));
+    this.init.userHello().subscribe((response) => console.log(response.body));
+    this.init.registerHello().subscribe((response) => console.log(response.body));
+  }
 
-  constructor(private router: Router, private logout: LogoutService) {
+  constructor(
+    private router: Router,
+    private logout: LogoutService,
+    private init: InitService
+  ) {
     this.router.events.subscribe((event) => {
       this.state = null;
       if (event instanceof NavigationEnd) {
