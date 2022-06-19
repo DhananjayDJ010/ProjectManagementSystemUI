@@ -66,10 +66,8 @@ export class RegistrationLoginComponent implements OnInit {
     this.registration.login(this.loginUserDetails).subscribe(
       (response) => {
         console.log(response);
-        let token: any = response.headers.get('token');
-        localStorage.setItem('JWT', token);
-        console.log(token);
         let responseBody: any = response.body;
+        localStorage.setItem('JWT', responseBody.accessToken);
         localStorage.setItem('loggedInEmailId', responseBody.emailId);
         localStorage.setItem('loggedInUserRole', responseBody.userRole);
         localStorage.setItem('loggedInUserId', responseBody.userId);
