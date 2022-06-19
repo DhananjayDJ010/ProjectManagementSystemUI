@@ -14,7 +14,7 @@ export default class SprintService {
         observe: 'response',
         headers: {
           projectIds: projectId,
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -28,7 +28,7 @@ export default class SprintService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -42,7 +42,7 @@ export default class SprintService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -58,7 +58,7 @@ export default class SprintService {
         observe: 'response',
         headers: {
           projectIds: projectId,
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -73,7 +73,7 @@ export default class SprintService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
           projectIds: projectId,
         },
       }
@@ -88,7 +88,7 @@ export default class SprintService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
           projectIds: projectId,
         },
       }
@@ -109,7 +109,7 @@ export default class SprintService {
         observe: 'response',
         headers: {
           projectIds: projectId,
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -131,7 +131,7 @@ export default class SprintService {
         observe: 'response',
         headers: {
           projectIds: projectId,
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );

@@ -12,7 +12,7 @@ export default class HomePageService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -26,7 +26,7 @@ export default class HomePageService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -40,7 +40,7 @@ export default class HomePageService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );

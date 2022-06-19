@@ -12,7 +12,7 @@ export default class RegistrationService {
       registrationRequest,
       {
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -28,7 +28,7 @@ export default class RegistrationService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );

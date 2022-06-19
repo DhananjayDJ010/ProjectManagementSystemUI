@@ -12,7 +12,7 @@ export default class ProjectService {
       userStory,
       {
         observe: 'response',
-        headers: { projectIds: projectId, 'content-type': 'application/json' },
+        headers: { projectIds: projectId, 'Content-Type': 'application/json' },
       }
     );
     return createUserStoryResponse;
@@ -26,7 +26,7 @@ export default class ProjectService {
         observe: 'response',
         headers: {
           projectIds: projectId,
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -44,7 +44,7 @@ export default class ProjectService {
       userStory,
       {
         observe: 'response',
-        headers: { projectId, 'content-type': 'application/json' },
+        headers: { projectId, 'Content-Type': 'application/json' },
       }
     );
     return updateUserStoryResponse;
@@ -58,7 +58,7 @@ export default class ProjectService {
       subTask,
       {
         observe: 'response',
-        headers: { projectId, 'content-type': 'application/json' },
+        headers: { projectId, 'Content-Type': 'application/json' },
       }
     );
     return crateSubTaskResponse;
@@ -78,7 +78,7 @@ export default class ProjectService {
       subTask,
       {
         observe: 'response',
-        headers: { projectId, 'content-type': 'application/json' },
+        headers: { projectId, 'Content-Type': 'application/json' },
       }
     );
     return updateSubTaskResponse;

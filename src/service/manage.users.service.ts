@@ -26,7 +26,7 @@ export default class ManageUserService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
           projectIds: currentProjectId,
           'create-project': 'false',
         },
@@ -41,7 +41,7 @@ export default class ManageUserService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
           projectIds: projectId,
         },
       }
@@ -55,7 +55,7 @@ export default class ManageUserService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -69,7 +69,7 @@ export default class ManageUserService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );

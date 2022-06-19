@@ -23,7 +23,7 @@ export class SubTaskViewService {
         observe: 'response',
         headers: {
           projectIds: projectId,
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -46,7 +46,7 @@ export class SubTaskViewService {
         observe: 'response',
         headers: {
           projectIds: projectId,
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -60,7 +60,7 @@ export class SubTaskViewService {
       {
         observe: 'response',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       }
     );
