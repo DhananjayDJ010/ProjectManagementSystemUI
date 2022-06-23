@@ -21,7 +21,7 @@ export default class ManageUserService {
     };
 
     let manageUsers = this.http.post(
-      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/manager/manage-user',
+      'https://u1vcnuupy5.execute-api.us-west-2.amazonaws.com/dev/api/v1.0/project-tracker/manager/manage-user',
       usersList,
       {
         observe: 'response',
@@ -37,7 +37,7 @@ export default class ManageUserService {
 
   getUsersForProject(projectId: string) {
     let getUsersInProj = this.http.get(
-      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-users',
+      'https://u1vcnuupy5.execute-api.us-west-2.amazonaws.com/dev/api/v1.0/project-tracker/get-users',
       {
         observe: 'response',
         headers: {
@@ -51,7 +51,7 @@ export default class ManageUserService {
 
   getAllUsers() {
     let getAllUsers = this.http.get(
-      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-all-users',
+      'https://u1vcnuupy5.execute-api.us-west-2.amazonaws.com/dev/api/v1.0/project-tracker/get-all-users',
       {
         observe: 'response',
         headers: {
@@ -64,7 +64,7 @@ export default class ManageUserService {
 
   getProjectDetailsFromProjectIds(projectIds: string) {
     let getProjectDetails = this.http.post(
-      'https://u0bqod1gs3.execute-api.ap-south-1.amazonaws.com/dev/api/v1.0/project-tracker/get-details/project',
+      'https://u1vcnuupy5.execute-api.us-west-2.amazonaws.com/dev/api/v1.0/project-tracker/get-details/project',
       projectIds,
       {
         observe: 'response',
